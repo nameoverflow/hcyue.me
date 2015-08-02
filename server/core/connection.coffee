@@ -53,12 +53,14 @@ class Connection
                 _this.response.end result
         else
             @response.end
+            
         console.log {
             'time': new Date()
             'status': @response.statusCode
             'ip': @request['connection']['remoteAddress']
             'url': @request.url
             'user-agent': @request.headers['user-agent']
+            'data': data
         }
     getCookie: () ->
         cookies = {}

@@ -1,8 +1,9 @@
 fs = require 'fs'
-conf =
+conf = (require '../config').session
+###
     'PATH_ROOT': 'tmp/'
     'MAX_AGE': 60*60*24*7
-
+###
 
 gID = () ->
     new Date().getTime() + Math.ceil Math.random() * 1000
@@ -25,27 +26,15 @@ delSessionFile = (session, callback) ->
         if err
             callback && callback(err)
         callback && callback()
-###
-destroySession = (conn, callback) ->
-    if not conn._session
-        callback && callback("No Session Exists")
-        return
-    delSessionFile conn._session, () ->
-        delete conn['_session']
-        callback && callback()
-###
+
 ###
 connect.session
-
 methods:
     get() 获取当前连接session信息
     set(data) 设置session，写入cookie
-###
 
-###
 session数据
 auth: 权限，'admin' 'guest'
-
 ###
 class Session
     constructor: (cookie, setCookie, callback) ->
