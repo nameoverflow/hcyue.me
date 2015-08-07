@@ -1,23 +1,23 @@
 ###
 Import the core file
 ###
-APP = require './server/core'
+yue = require 'yue'
 
 ###
 Create app object
 ###
-app = new APP()
+app = new yue.app()
 
 ###
 Static file server
 ###
-staticFile = require './server/static_file'    
+staticFile = yue.static  
 app.get '/static/*', staticFile 'public'
 
 ###
 Index page
 ###
-index = require './server/handler/index_page'
+index = require './handler/main_page'
 app.get '/', index
 
 
@@ -33,7 +33,7 @@ app.get '/favicon.ico', (conn, params) ->
 ###
 Example of session
 ###
-session_test = require './server/handler/session_test'
+session_test = require './handler/session_test'
 app.get '/name/{name}', session_test
 
 ###
@@ -42,3 +42,9 @@ Example of url params
 app.get '/path/*', (conn,params) ->
     conn.send 'html', "<html>#{params.path}</html>"
 
+###
+# API
+###
+
+getArticle = require './handler/api/get_article'
+app.get '/api/get_article', getArticle
