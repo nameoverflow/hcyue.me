@@ -1,2 +1,2 @@
 module.exports = (conn, params) ->
-    conn.send 'html', '<html>hello world!</html>'
+    conn.static './view/index.html'

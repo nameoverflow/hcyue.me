@@ -31,6 +31,8 @@ module.exports = function (grunt) {
             dist: {
                 files: {
                     'public/script/*.js': 'src/script/*.js'
+                    'public/script/*.jsx': 'src/script/*.js'
+
                 }
             }
         }
