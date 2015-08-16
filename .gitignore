@@ -1,2 +1,5 @@
 node_modules/*
 !node_modules/yue/*
+build/*
+public/*
+view.ai

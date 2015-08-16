@@ -10,8 +10,8 @@ module.exports = function (grunt) {
         */
         watch: {
             scripts: {
-                files: 'src/script/*.js',
-                tasks: ['babel'],
+                files: ['src/script/**/*.js', 'src/script/**/*.jsx'],
+                tasks: ['babel', 'browserify'],
                 options: {
                     livereload: false,
                 },
@@ -26,14 +26,40 @@ module.exports = function (grunt) {
         },
         babel: {
             options: {
-                sourceMap: true
+                sourceMap: true,
+                modules: 'common'
             },
             dist: {
-                files: {
-                    'public/script/*.js': 'src/script/*.js'
-                    'public/script/*.jsx': 'src/script/*.js'
-
-                }
+                files: [{
+                    'expand': true,
+                    'cwd': 'src/script/',
+                    'src': ['**/*.js', '**/*.jsx'],
+                    'dest': 'build/',
+                    'ext': '.js'
+                }]
+            }
+        },
+        browserify: {
+            build: {
+                src: 'build/main.js',
+                dest: 'public/script/main.js'
+            }
+        },
+        uglify: {
+            com: {
+                src: 'public/script/main.js',
+                dest: 'public/script/main.min.js'
+            }
+        },
+        sass: {
+            dist: {
+                files: [{
+                    'expand': true,
+                    'cwd': 'src/style/',
+                    'src': ['**/*.sass', '**/*.scss'],
+                    'dest': 'public/style/',
+                    'ext': '.css'
+                }]
             }
         }
     });
@@ -42,15 +68,20 @@ module.exports = function (grunt) {
     /*
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-concat');
+    */
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-watch');
-    */
+    grunt.loadNpmTasks('grunt-contrib-sass');
     grunt.loadNpmTasks('grunt-babel');
+    grunt.loadNpmTasks('grunt-browserify');
 
     // 每行registerTask定义一个任务
     // grunt.registerTask('default', ['jshint', 'concat', 'uglify']);
     // grunt.registerTask('check', ['jshint']);
-    grunt.registerTask('c', ['babel']);
-
+    grunt.registerTask('c', ['babel', 'browserify', 'sass']);
+    grunt.registerTask('p', ['uglify']);
+    grunt.registerTask('cp', ['babel', 'browserify', 'sass', 'uglify']);
+    
+    grunt.registerTask('w', ['watch']);
 
 };

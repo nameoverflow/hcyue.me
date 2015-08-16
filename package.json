@@ -8,8 +8,11 @@
   },
   "author": "",
   "devDependencies": {
+    "react": "*",
+    "react-router": "*",
     "grunt": "0.x.x",
     "grunt-babel": "*",
+    "grunt-browserify": "*",
     "grunt-contrib-concat": "~0.1.1",
     "grunt-contrib-jshint": "*",
     "grunt-contrib-sass": "^0.9.2",
