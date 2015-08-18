@@ -7,8 +7,8 @@ var NavBtn =  React.createClass({
     render() {
         return (
             <div className="nav-btn">
-                <Link to={this.props.name}>
-                    <img src={"/static/img/" + this.props.name + ".svg"} />
+                <Link to={this.props.item}>
+                    <img src={"/static/img/" + this.props.item + ".svg"} />
                 </Link>
             </div>
         )
@@ -23,16 +23,18 @@ var HeaderNav = React.createClass({
                     <img />
                 </div>
                 <ul>
-            {
-                menu.map(item =>
+            {/*
+                menu.map(item => 
                     <li>
-                        <NavBtn name={item} />
+                        <NavBtn key={item} name={item}/>
+
                     </li>
                 )
-            }
+            */}
                 </ul>
             </header>
         )
     }
 });
-module.exports = HeaderNav
+
+export default HeaderNav;

@@ -19,3 +19,13 @@ Index page
 ###
 index = require './handler/main_page'
 app.get '/', index
+
+
+###
+APIs
+###
+
+get_article = require './handler/api/get_article'
+app.get '/api/article/get'
+
+

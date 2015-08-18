@@ -10,7 +10,12 @@ module.exports = function (grunt) {
         */
         watch: {
             scripts: {
-                files: ['src/script/**/*.js', 'src/script/**/*.jsx'],
+                files: [
+                    'src/script/**/*.js',
+                    'src/script/**/*.jsx',
+                    'src/script/*.js',
+                    'src/script/*.jsx'                    
+                ],
                 tasks: ['babel', 'browserify'],
                 options: {
                     livereload: false,
