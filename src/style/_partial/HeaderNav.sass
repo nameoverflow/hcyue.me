@@ -1,0 +1,74 @@
+$banner_height: 380px
+$tri_height: 43px
+$nav_width: 300px
+$btn_width: $nav_width / 4
+#HeaderNav
+    position: fixed
+    width: $nav_width
+    overflow: hidden
+    top: 0
+    left: 0
+    bottom: 0
+    > ul
+        position: absolute
+        top: $banner_height - $tri_height
+        margin: 0
+        padding: 0
+        width: 100%
+        &:before
+            content: ''
+            height: 1px
+            width: 600px
+            background-color: #333
+            transform: rotate(30deg)
+        > li
+            list-style: none
+
+.banner
+    position: absolute
+    top: 0
+    left: 0
+    height: $banner_height
+    width: 100%
+    background-image: url("/static/img/banner.png")
+
+.NavBtn
+    box-sizing: border-box
+    position: relative
+    float: left
+    border-right: 1px solid #333
+
+    div
+        position: relative
+
+        height: 321px
+        width: $btn_width - 1px
+        margin-top: $tri_height
+        text-align: center
+        background-color: #FFF
+        &:hover
+            background-color: #eee
+            &:before
+                border-bottom-color: #eee
+        >img
+            position: absolute
+            margin: auto
+            top: 0
+            bottom: 0
+            left: 0
+            right: 0
+        &:before
+            position: relative
+            bottom: 60px
+            left: 0
+            width: 0
+            height: 0
+            content: ''
+            border-bottom: 43px solid #fff
+            border-left: ($btn_width - 1px) solid transparent
+            //border-right: 1px solid #333
+
+@for $i from 1 through 4
+    #HeaderNav > ul > li:nth-child(#{$i}) > .NavBtn
+        top: -44px * ($i - 1)
+
