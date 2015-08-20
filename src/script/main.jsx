@@ -4,6 +4,7 @@ import Router from 'react-router'
 
 import HeaderNav from './components/HeaderNav';
 import ArticleSingle from './components/ArticleSingle';
+import ArticleList from './components/ArticleList';
 
 var RouteHandler = Router.RouteHandler;
 var Main = React.createClass({
@@ -12,7 +13,7 @@ var Main = React.createClass({
             <div id='container'>
                 <HeaderNav />
                 <main>
-                    {/*<RouteHandler />*/}
+                    {<RouteHandler />}
                 </main>
             </div>
         );
@@ -22,12 +23,16 @@ var Main = React.createClass({
 var Route = Router.Route;
 var DefaultRoute = Router.DefaultRoute;
 
-/*var routes = (
+var routes = (
     <Route name='main' path='/' handler={Main}>
+        <Route name='home' path="/" handler={ArticleList} />
+        <Route name='archives' path="/archives" handler={ArticleList} />
+        <Route name='lab' path="/lab" handler={ArticleList} />
+        <Route name='about' path="/about" handler={ArticleList} />
         <Route name='article' path="article/:id" handler={ArticleSingle} />
-        <DefaultRoute handler={ArticleSingle} />
+        <DefaultRoute handler={ArticleList} />
     </Route>
-);*/
+);
 
 React.render(<Main />, document.body);
 /*

@@ -24,7 +24,7 @@ module.exports = (conn, params) ->
 
     cur = db.find 'Post', {type: 'article'}
 
-    cur.limit(limit).sort({date: -1}).select('_id title tags createDate')
+    cur.sort({date: -1}).select('_id title tags createDate').skip(start).limit(limit)
 
     switch type
         when 'summary'
