@@ -1,14 +1,14 @@
-import React from 'react';
-import {Link} from 'react-router';
-
+// import React from 'react';
+// import {Link} from 'react-router';
+var Link = ReactRouter.Link
 var menu = ['home', 'archives', 'lab', 'about'];
 var NavBtn =  React.createClass({
 
     render() {
         return (
             <div className="nav-btn">
-                <Link to={this.props.item}>
-                    <img src={"/static/img/" + this.props.item + ".svg"} />
+                <Link to={this.props.name}>
+                    <img src={"/static/img/" + this.props.name + ".svg"} />
                 </Link>
             </div>
         )
@@ -23,14 +23,14 @@ var HeaderNav = React.createClass({
                     <img />
                 </div>
                 <ul>
-            {/*
+            {
                 menu.map(item => 
                     <li>
                         <NavBtn key={item} name={item}/>
 
                     </li>
                 )
-            */}
+            }
                 </ul>
             </header>
         )

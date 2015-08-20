@@ -15,10 +15,10 @@ staticFile = yue.static
 app.get '/static/*', staticFile 'public'
 
 ###
-Index page
+Main page
 ###
 index = require './handler/main_page'
-app.get '/', index
+app.get ['/', '/archives', '/lab', '/about', '/article/*'], index
 
 
 ###

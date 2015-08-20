@@ -1,5 +1,5 @@
 
-import React from 'react'
+// import React from 'react'
 
 let ArticleTitle = React.createClass({
     render() {

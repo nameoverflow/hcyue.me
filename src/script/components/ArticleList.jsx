@@ -1,7 +1,9 @@
-import React from 'react';
+// import React from 'react';
 import {ajax, getEleTop} from '../utils';
 
 import ArticleTitle from './ArticleTitle';
+
+var Link = ReactRouter.Link
 
 var ArticleList = React.createClass({
     getInitialState() {
@@ -32,14 +34,6 @@ var ArticleList = React.createClass({
             'limit': limit,
             'type': 'summary'
         }).then(data => {
-            if (data.error) {
-                this.setState({
-                    archives: [{
-                        body:data.error.message
-                    }]
-                });
-                return;
-            }
             if (!data[0]) {
                 this.setState({
                     end: true
@@ -49,23 +43,29 @@ var ArticleList = React.createClass({
             this.setState({
                 archives: this.state.archives.concat(data),
                 num: this.state.num + limit
-            })
-        })
+            });
+        }).catch(data => {
+            this.setState({body: data[0] && data[0].message});
+        });
     },
     render() {
         return (
             <main className="archives">
-        {
-            this.state.archives.map(item => {
-                <Link to="article" params={{id: item._id}}>
-                    <ArticleTitle className="title-list"></ArticleTitle>
-                </Link>
-                <div className="article-date">
-                    {item.createDate}
-                </div>
-                <AriticleText>{item.body}</AriticleText>
-            });
-        }
+                <ul>
+            {
+                this.state.archives.map(item => 
+                    <li>
+                        <Link to="article" params={{id: item._id}}>
+                            <ArticleTitle className="title-list"></ArticleTitle>
+                        </Link>
+                        <div className="article-date">
+                            {item.createDate}
+                        </div>
+                        <AriticleText>{item.body}</AriticleText>
+                    </li>
+                )
+            }
+                </ul>
 
             </main>
         );

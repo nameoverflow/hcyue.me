@@ -12,6 +12,7 @@ export var ajax = {
                 let data = JSON.parse(xhr.responseText);
                 resolve(data);
             } else {
+                let data = JSON.parse(xhr.responseText);
                 reject(data);
             }
             xhr.send(req_data);
@@ -22,10 +23,10 @@ export var ajax = {
     },
     get(uri, search_data = {}) {
         let data_str = '';
-        for (key in search_data) {
-            data_str += key + '=' + data[key] + '&';
+        for (let key in search_data) {
+            data_str += key + '=' + search_data[key] + '&';
         }
-        url = uri + '?' + data_str.slice(0, -1);
+        let url = uri + '?' + data_str.slice(0, -1);
 
         return this.request('GET', url);
     }

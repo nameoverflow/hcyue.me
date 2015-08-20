@@ -1,4 +1,4 @@
-import React from 'react';
+// import React from 'react';
 import {ajax} from '../utils';
 
 import ArticleTitle from './ArticleTitle';
@@ -14,18 +14,19 @@ var ArticleSingle = React.createClass({
         ajax.get('/api/article/get', {
             'id': this.props.params.post_id
         }).then(data => {
-            if (data.error) {
-                this.setState({body:data.error.message});
-                return;
-            }
             data = data[0];
+            if (!data) {
+                this.setState({body: 'id not found!'});
+            }
             this.setState({
-                title: data['title'];
-                createDate: data['createDate'];
-                body: data['body'];
+                title: data['title'],
+                createDate: data['createDate'],
+                body: data['body'],
                 editDate: data['editDate']
+            });
+        }).catch(data => {
+            this.setState({body: data[0].message});
         });
-        })
     },
 
     render() {
