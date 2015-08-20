@@ -16,12 +16,6 @@ module.exports = (conn, params) ->
         limit = +params.query['limit'] || 1
         type = params.query['type'] || 'all'
         # summary | title | all
-    if not (start and limit)
-        conn.send 'err', {
-            err: 500
-            message: '少年你很有想法'
-        }
-
     cur = db.find 'Post', {type: 'article'}
 
     cur.sort({date: -1}).select('_id title tags createDate').skip(start).limit(limit)

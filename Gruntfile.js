@@ -23,8 +23,10 @@ module.exports = function (grunt) {
             },
             css: {
                 files: [
+                    'src/style/**/*.scss',
+                    'src/style/*.scss',
                     'src/style/**/*.sass',
-                    'src/style/*.sass',                    
+                    'src/style/*.sass'
                 ],
                 tasks: ['sass'],
                 options: {
@@ -68,7 +70,7 @@ module.exports = function (grunt) {
                 files: [{
                     'expand': true,
                     'cwd': 'src/style/',
-                    'src': ['main.sass'],
+                    'src': ['style.sass'],
                     'dest': 'public/style/',
                     'ext': '.css'
                 }]

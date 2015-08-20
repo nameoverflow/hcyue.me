@@ -2,11 +2,12 @@
 import {ajax} from '../utils';
 
 import ArticleTitle from './ArticleTitle';
+import ArticleText from './ArticleText';
 
-var ArticleSingle = React.createClass({
+var SingleArticle = React.createClass({
     getInitialState() {
         return {
-            body: 'loading...'
+            body: '<p>loading...</p>'
         };
     },
 
@@ -14,6 +15,10 @@ var ArticleSingle = React.createClass({
         ajax.get('/api/article/get', {
             'id': this.props.params.post_id
         }).then(data => {
+            if (data.err) {
+                this.setState({body: data.message});
+                return;
+            }
             data = data[0];
             if (!data) {
                 this.setState({body: 'id not found!'});
@@ -25,7 +30,7 @@ var ArticleSingle = React.createClass({
                 editDate: data['editDate']
             });
         }).catch(data => {
-            this.setState({body: data[0].message});
+            console.log(data);
         });
     },
 
@@ -38,11 +43,11 @@ var ArticleSingle = React.createClass({
                 <div className="article-date">
                     {this.state.createDate || ''}
                 </div>
-                <AriticleText>{this.state.body}</AriticleText>
+                <ArticleText>{this.state.body}</ArticleText>
                 <div className="edit-date">{this.state.editDate}</div>
             </article>
         );
     }
 });
 
-export default ArticleSingle;
+export default SingleArticle;

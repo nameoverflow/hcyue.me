@@ -2,6 +2,7 @@
 import {ajax, getEleTop} from '../utils';
 
 import ArticleTitle from './ArticleTitle';
+import ArticleText from './ArticleText';
 
 var Link = ReactRouter.Link
 
@@ -34,26 +35,40 @@ var ArticleList = React.createClass({
             'limit': limit,
             'type': 'summary'
         }).then(data => {
-            if (!data[0]) {
-                this.setState({
-                    end: true
-                })
+            if (data.err) {
+                let end_data = {
+                        body: data.message
+                    },
+                    new_list = this.state.archives.concat([end_data]);
+                this.setState({archives: new_list});
                 return;
             }
+            if (!data[0]) {
+                let end_data = {
+                        body: 'The End'
+                    },
+                    new_list = this.state.archives.concat([end_data]);
+                this.setState({
+                    end: true,
+                    archives: new_list
+                });
+                return;
+            }
+            let new_list = this.state.archives.concat(data);
             this.setState({
-                archives: this.state.archives.concat(data),
+                archives: new_list,
                 num: this.state.num + limit
             });
         }).catch(data => {
-            this.setState({body: data[0] && data[0].message});
+            console.log(data);
         });
     },
     render() {
         return (
-            <main className="archives">
                 <ul>
             {
                 this.state.archives.map(item => 
+            item.id ? (
                     <li>
                         <Link to="article" params={{id: item._id}}>
                             <ArticleTitle className="title-list"></ArticleTitle>
@@ -61,13 +76,18 @@ var ArticleList = React.createClass({
                         <div className="article-date">
                             {item.createDate}
                         </div>
-                        <AriticleText>{item.body}</AriticleText>
+
+                        <ArticleText>{item.body}</ArticleText>
                     </li>
+            ) : (
+                    <li>
+                        <ArticleText>{item.body}</ArticleText>
+                    </li>
+            )
                 )
             }
                 </ul>
 
-            </main>
         );
     }
 });

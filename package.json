@@ -10,8 +10,6 @@
   "author": "",
   "devDependencies": {
     "yue": "*",
-    "react": "*",
-    "react-router": "*",
     "grunt": "0.x.x",
     "grunt-babel": "*",
     "grunt-browserify": "*",

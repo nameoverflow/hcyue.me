@@ -3,7 +3,7 @@
 
 
 import HeaderNav from './components/HeaderNav';
-import ArticleSingle from './components/ArticleSingle';
+import SingleArticle from './components/SingleArticle';
 import ArticleList from './components/ArticleList';
 
 var Router = window.ReactRouter
@@ -14,7 +14,9 @@ var Main = React.createClass({
         return (
             <div id='container'>
                 <HeaderNav />
-                <RouteHandler />
+                <main>
+                    <RouteHandler />
+                </main>
             </div>
         );
     }
@@ -24,17 +26,17 @@ var Route = Router.Route;
 var DefaultRoute = Router.DefaultRoute;
 
 var routes = (
-    <Route name='main' path='/' handler={Main}>
+    <Route path='/' handler={Main}>
         <Route name='home' path="/" handler={ArticleList} />
         <Route name='archives' path="archives" handler={ArticleList} />
         <Route name='lab' path="lab" handler={ArticleList} />
         <Route name='about' path="about" handler={ArticleList} />
-        <Route name='article' path="article/:id" handler={ArticleSingle} />
+        <Route name='article' path="article/:id" handler={SingleArticle} />
         <DefaultRoute handler={ArticleList} />
     </Route>
 );
 
 //React.render(<Main />, document.body);
-Router.run(routes, Router.HistoryLocation, (Root) =>{
-    React.render(<Root/>, document.body);
+Router.run(routes, Router.HistoryLocation, (Handler) =>{
+    React.render(<Handler />, document.body);
 });
