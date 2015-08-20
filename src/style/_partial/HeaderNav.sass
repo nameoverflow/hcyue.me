@@ -9,6 +9,7 @@ $btn_width: $nav_width / 4
     top: 0
     left: 0
     bottom: 0
+    box-shadow: 1px 0px 7px #999
     > ul
         position: absolute
         top: $banner_height - $tri_height
@@ -16,13 +17,20 @@ $btn_width: $nav_width / 4
         padding: 0
         width: 100%
         &:before
+            display: block
+            position: absolute
+            z-index: 1000
+            top: 319px
+            left: -23px
             content: ''
             height: 1px
-            width: 600px
+            width: 350px
             background-color: #333
-            transform: rotate(30deg)
+            transform: rotate(-30.5deg)
         > li
             list-style: none
+            float: left
+
 
 .banner
     position: absolute
@@ -31,13 +39,26 @@ $btn_width: $nav_width / 4
     height: $banner_height
     width: 100%
     background-image: url("/static/img/banner.png")
+    > img
+        position: absolute
+        z-index: 1000
+        width: 150px
+        height: 150px
+        border-radius: 50%
+        background-color: #FFF
+        box-shadow: 3px 3px 7px #333
+        margin: auto
+        bottom: $tri_height * 0.5
+        left: 0
+        right: 0
+
 
 .NavBtn
     box-sizing: border-box
     position: relative
     float: left
     border-right: 1px solid #333
-
+    @include clearfix()
     div
         position: relative
 
@@ -50,6 +71,8 @@ $btn_width: $nav_width / 4
             background-color: #eee
             &:before
                 border-bottom-color: #eee
+            &:after
+                border-top-color: #eee
         >img
             position: absolute
             margin: auto
@@ -57,16 +80,23 @@ $btn_width: $nav_width / 4
             bottom: 0
             left: 0
             right: 0
-        &:before
-            position: relative
-            bottom: 60px
-            left: 0
+        &:before, &:after
+            position: absolute
             width: 0
             height: 0
             content: ''
+        &:before
+            top: -43px
+            left: 0
             border-bottom: 43px solid #fff
             border-left: ($btn_width - 1px) solid transparent
-            //border-right: 1px solid #333
+        &:after
+            bottom: -43px
+            left: 0
+            border-top: 43px solid #fff
+            border-right: ($btn_width - 1px) solid transparent
+
+
 
 @for $i from 1 through 4
     #HeaderNav > ul > li:nth-child(#{$i}) > .NavBtn

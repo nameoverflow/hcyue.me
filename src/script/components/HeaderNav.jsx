@@ -19,7 +19,9 @@ var HeaderNav = React.createClass({
     render() {
         return (
             <header id="HeaderNav">
-                <div className="banner" />
+                <div className="banner">
+                    <img />
+                </div>
                 <ul>
             {
                 menu.map(item => 
