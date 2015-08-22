@@ -1,5 +1,5 @@
 // import React from 'react';
-import {ajax, getEleTop} from '../utils';
+import {ajax, getEleTop, parseTime} from '../utils';
 
 import ArticleTitle from './ArticleTitle';
 import ArticleText from './ArticleText';
@@ -59,6 +59,7 @@ var ArticleList = React.createClass({
                 archives: new_list,
                 num: this.state.num + limit
             });
+            console.log(this.state.archives);
         }).catch(data => {
             console.log(data);
         });
@@ -68,20 +69,20 @@ var ArticleList = React.createClass({
                 <ul>
             {
                 this.state.archives.map(item => 
-            item.id ? (
-                    <li>
+            item._id ? (
+                    <li key={item._id}>
                         <Link to="article" params={{id: item._id}}>
-                            <ArticleTitle className="title-list"></ArticleTitle>
+                            <ArticleTitle className="title-list">{item.title || ''}</ArticleTitle>
                         </Link>
                         <div className="article-date">
-                            {item.createDate}
+                            {item.createDate && parseTime(item.createDate)[0] || ''}
                         </div>
 
-                        <ArticleText>{item.body}</ArticleText>
+                        <ArticleText>{item.body || item.summary || ''}</ArticleText>
                     </li>
             ) : (
                     <li>
-                        <ArticleText>{item.body}</ArticleText>
+                        <ArticleText>{item.body || item.summary || ''}</ArticleText>
                     </li>
             )
                 )

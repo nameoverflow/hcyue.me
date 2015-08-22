@@ -7,7 +7,7 @@ module.exports = (conn, params) ->
                 if err
                     conn.send 'err', {
                         err: 500
-                        message: 'id not found!'
+                        message: err
                     }
                 conn.send 'json', row
             return
@@ -18,19 +18,20 @@ module.exports = (conn, params) ->
         # summary | title | all
     cur = db.find 'Post', {type: 'article'}
 
-    cur.sort({date: -1}).select('_id title tags createDate').skip(start).limit(limit)
-
+    cur.sort({date: -1}).select('_id title tags createDate ' + (if type is 'summary' then 'summary' else if type is 'all' then 'body' else '')).skip(start).limit(limit)
+    ###
     switch type
         when 'summary'
             cur.select '+summary'
         when 'all'
             cur.select '+body'
+    ###
 
     cur.exec (err, row) ->
         if err
             conn.send 'err', {
                 err: 500
-                message: 'error when select data'
+                message: err
             }
         conn.send 'json', row
 
