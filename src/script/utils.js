@@ -41,3 +41,5 @@ export var getEleTop = function (elem) {
     }
     return actualTop;
 }
+
+//export var 
