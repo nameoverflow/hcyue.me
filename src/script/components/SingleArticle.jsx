@@ -37,8 +37,8 @@ var SingleArticle = React.createClass({
 
     render() {
         return (
-            <article className="article-single typo">
-                <ArticleTitle className="title-single">
+            <article className="SingleArticle typo">
+                <ArticleTitle className="TitleSingle">
                     {this.state.title || ''}
                 </ArticleTitle>
                 <div className="article-date">

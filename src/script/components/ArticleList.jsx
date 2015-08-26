@@ -66,11 +66,12 @@ var ArticleList = React.createClass({
     },
     render() {
         return (
-                <ul>
+                <ul className="ArticleList">
             {
                 this.state.archives.map(item => 
             item._id ? (
                     <li key={item._id}>
+                        <article>
                         <Link to="article" params={{id: item._id}}>
                             <ArticleTitle className="title-list">{item.title || ''}</ArticleTitle>
                         </Link>
@@ -79,6 +80,7 @@ var ArticleList = React.createClass({
                         </div>
 
                         <ArticleText>{item.body || item.summary || ''}</ArticleText>
+                    </article>
                     </li>
             ) : (
                     <li>

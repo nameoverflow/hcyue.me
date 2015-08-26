@@ -62,8 +62,8 @@ export var getEleTop = function (elem) {
     let actualTop = element.offsetTop;
     let current = element.offsetParent;
     while (current !== null){
-    　　actualTop += current.offsetTop;
-    　　current = current.offsetParent;
+        actualTop += current.offsetTop;
+        current = current.offsetParent;
     }
     return actualTop;
 }
