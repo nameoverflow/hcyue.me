@@ -4,3 +4,4 @@ build/*
 public/*
 view.ai
 .sass-cache/*
+*.swp

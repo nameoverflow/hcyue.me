@@ -2,6 +2,11 @@ $banner_height: 380px
 $tri_height: 43px
 $nav_width: 300px
 $btn_width: $nav_width / 4
+$btn_height: 321px
+
+$banner_height_s: 300px
+$btn_height_s: 260px
+
 #HeaderNav
     position: fixed
     width: $nav_width
@@ -14,6 +19,8 @@ $btn_width: $nav_width / 4
     > ul
         position: absolute
         top: $banner_height - $tri_height
+        @media #{$note_pc}
+            top: $banner_height_s - $tri_height
         margin: 0
         padding: 0
         width: 100%
@@ -22,6 +29,8 @@ $btn_width: $nav_width / 4
             position: absolute
             z-index: 1000
             top: 319px
+            @media #{$note_pc}
+                top: 257px
             left: -23px
             content: ''
             height: 1px
@@ -38,6 +47,8 @@ $btn_width: $nav_width / 4
     top: 0
     left: 0
     height: $banner_height
+    @media #{$note_pc}
+        height: $banner_height_s        
     width: 100%
     background-image: url("/static/img/banner.png")
     > img
@@ -63,8 +74,10 @@ $btn_width: $nav_width / 4
     div
         position: relative
 
-        height: 321px
+        height: $btn_height
         width: $btn_width - 1px
+        @media #{$note_pc}
+            height: $btn_height_s
         margin-top: $tri_height
         text-align: center
         background-color: #FFF
@@ -101,5 +114,5 @@ $btn_width: $nav_width / 4
 
 @for $i from 1 through 4
     #HeaderNav > ul > li:nth-child(#{$i}) > .NavBtn
-        top: -44px * ($i - 1)
+        top: -($tri_height + 1) * ($i - 1)
 
