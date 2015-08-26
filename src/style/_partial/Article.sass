@@ -1,2 +1,16 @@
 $nav_width: 300px
-$main_side: 160px
+$main_outside: 160px
+$main_inside: 20px
+$article_width: 800px
+
+article
+    position: relative
+    max-width: $article_width
+    margin-left: auto
+    margin-right: auto
+
+.title-single
+    position: absolute
+    h2
+        writing-mode: vertical-rl
+        -webkit-writing-mode: vertical-rl
