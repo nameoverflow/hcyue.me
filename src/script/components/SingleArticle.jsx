@@ -1,22 +1,28 @@
 // import React from 'react';
-import {ajax} from '../utils';
+import {ajax, parseTime} from '../utils';
 
 import ArticleTitle from './ArticleTitle';
+import ArticleText from './ArticleText';
 
-var ArticleSingle = React.createClass({
+var SingleArticle = React.createClass({
     getInitialState() {
         return {
-            body: 'loading...'
+            body: '<p>loading...</p>'
         };
     },
 
     componentDidMount() {
         ajax.get('/api/article/get', {
-            'id': this.props.params.post_id
+            'id': this.props.params.id
         }).then(data => {
-            data = data[0];
+            if (data.err) {
+                this.setState({body: data.message});
+                return;
+            }
+            //data = data[0];
             if (!data) {
                 this.setState({body: 'id not found!'});
+                return;
             }
             this.setState({
                 title: data['title'],
@@ -25,24 +31,26 @@ var ArticleSingle = React.createClass({
                 editDate: data['editDate']
             });
         }).catch(data => {
-            this.setState({body: data[0].message});
+            console.log(data);
         });
     },
 
     render() {
         return (
-            <article className="article-single">
-                <ArticleTitle className="title-single">
+            <article className="SingleArticle typo">
+                <ArticleTitle className="TitleSingle">
                     {this.state.title || ''}
                 </ArticleTitle>
                 <div className="article-date">
-                    {this.state.createDate || ''}
+                    {this.state.createDate && parseTime(this.state.createDate)[0] || ''}
                 </div>
-                <AriticleText>{this.state.body}</AriticleText>
-                <div className="edit-date">{this.state.editDate}</div>
+                <ArticleText>{this.state.body}</ArticleText>
+                <div
+                    className="edit-date"
+                    style={this.state.createDate === this.state.editDate ? {display: 'none'} : {}}>编辑于{this.state.editDate}</div>
             </article>
         );
     }
 });
 
-export default ArticleSingle;
+export default SingleArticle;
