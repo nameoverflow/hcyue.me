@@ -3,10 +3,14 @@
 
 let ArticleTitle = React.createClass({
     render() {
-        <div className={this.prop.className}>
-            <h2>
-                {this.props.children}
-            </h2>
-        </div>
+        return (
+            <div className={this.props.className}>
+                <h2>
+                    {this.props.children}
+                </h2>
+            </div>
+        );
     }
 });
+
+export default ArticleTitle;

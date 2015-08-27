@@ -5,8 +5,10 @@ var ArticleText = React.createClass({
         return (
             <div 
                 className="article-text" 
-                dangerouslySetInnerHTML={this.props.children}
+                dangerouslySetInnerHTML={{__html: this.props.children.toString()}}
                 />
         );
     }
 });
+
+export default ArticleText;

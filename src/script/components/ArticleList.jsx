@@ -1,7 +1,8 @@
 // import React from 'react';
-import {ajax, getEleTop} from '../utils';
+import {ajax, getEleTop, parseTime} from '../utils';
 
 import ArticleTitle from './ArticleTitle';
+import ArticleText from './ArticleText';
 
 var Link = ReactRouter.Link
 
@@ -34,40 +35,68 @@ var ArticleList = React.createClass({
             'limit': limit,
             'type': 'summary'
         }).then(data => {
-            if (!data[0]) {
-                this.setState({
-                    end: true
-                })
+            if (data.err) {
+                let end_data = {
+                        body: data.message
+                    },
+                    new_list = this.state.archives.concat([end_data]);
+                this.setState({archives: new_list});
                 return;
             }
+            if (!data[0]) {
+                let end_data = {
+                        body: 'The End'
+                    },
+                    new_list = this.state.archives.concat([end_data]);
+                this.setState({
+                    end: true,
+                    archives: new_list
+                });
+                return;
+            }
+            let new_list = this.state.archives.concat(data);
             this.setState({
-                archives: this.state.archives.concat(data),
+                archives: new_list,
                 num: this.state.num + limit
             });
+            console.log(this.state.archives);
         }).catch(data => {
-            this.setState({body: data[0] && data[0].message});
+            console.log(data);
         });
     },
     render() {
         return (
-            <main className="archives">
-                <ul>
+                <ul className="ArticleList">
             {
-                this.state.archives.map(item => 
-                    <li>
-                        <Link to="article" params={{id: item._id}}>
-                            <ArticleTitle className="title-list"></ArticleTitle>
-                        </Link>
+                this.state.archives.map(item =>
+            item._id ? (
+                    <li key={item._id}>
+                        <article className="typo">
+                            <ArticleTitle className="title-list">
+                                <Link to="article" params={{id: item._id}}>
+                                    {item.title || ''}
+                                </Link>
+                            </ArticleTitle>
                         <div className="article-date">
-                            {item.createDate}
+                            {item.createDate && parseTime(item.createDate)[0] || ''}
                         </div>
-                        <AriticleText>{item.body}</AriticleText>
+
+                        <ArticleText>
+                            {item.body || item.summary || ''}
+                        </ArticleText>
+                    </article>
                     </li>
+            ) : (
+                    <li>
+                        <ArticleText>
+                            {item.body || item.summary || ''}
+                        </ArticleText>
+                    </li>
+            )
                 )
             }
                 </ul>
 
-            </main>
         );
     }
 });

@@ -26,6 +26,10 @@ APIs
 ###
 
 get_article = require './handler/api/get_article'
-app.get '/api/article/get'
+app.get '/api/article/get', get_article
+
+test = require './handler/api/test'
+app.get '/api/fuck', test
+
 
 

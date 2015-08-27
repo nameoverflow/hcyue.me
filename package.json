@@ -1,15 +1,16 @@
 {
-  "name": "blog-view",
+  "name": "yue-blog",
   "version": "0.1.0",
-  "description": "",
+  "description": "Personal blog website powered by yue",
+  "repository": "https://github.com/NameIsUseless/blog",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "devDependencies": {
-    "react": "*",
-    "react-router": "*",
+    "mongoose": "*",
+    "yue": "*",
     "grunt": "0.x.x",
     "grunt-babel": "*",
     "grunt-browserify": "*",
