@@ -9,6 +9,7 @@
   },
   "author": "",
   "devDependencies": {
+    "mongoose": "*",
     "yue": "*",
     "grunt": "0.x.x",
     "grunt-babel": "*",
