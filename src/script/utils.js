@@ -20,30 +20,6 @@ export var ajax = {
             xhr.send(req_data);
         });
     },
-    /*
-    get(uri, search_data = {}) {
-        return new Promise((resolve, reject) => {
-            let xhr = new XMLHttpRequest(),
-                data_str = '';
-            for (let key in search_data) {
-                data_str += key + '=' + search_data[key] + '&';
-            }
-            let url = uri + '?' + data_str.slice(0, -1);
-
-            xhr.open('GET', url, true);
-
-            xhr.onload = () => {
-                if (xhr.status >= 200 && xhr.status <= 400) {
-                    let data = JSON.parse(xhr.responseText);
-                    resolve(data);
-                } else {
-                    let data = JSON.parse(xhr.responseText);
-                    reject(data);
-                }
-            }
-            xhr.send();
-        });
-    },*/
     post(uri, req_data) {
         return this.request('POST', uri, JSON.stringify(req_data));
     },
@@ -74,8 +50,8 @@ export var parseTime = (str) => {
 }
 
 export var verticalTitle = (elem) => {
-    let e_arr = str.match(/(\w\s?)+/g)),
-        str = elem.innerHTML,
+    let str = elem.innerHTML,
+        e_arr = str.match(/(\w\s?)+/g)),
         arr = [str],
         e_w;
     for (let i = 0; i < e_arr.length; i++) {
@@ -83,7 +59,11 @@ export var verticalTitle = (elem) => {
     }
     str = '';
     for (let i = 0; i < e_arr.length; i++) {
-        str += arr[i] + '<span style="transform:rotate()"
+        str += arr[i]
+            + '<span style="transform:rotate(90deg)">'
+            + e_arr[i]
+            + '</span>';
     }
-
+    str += arr[e_arr.length];
+    elem.innerHTML = str;
 }
