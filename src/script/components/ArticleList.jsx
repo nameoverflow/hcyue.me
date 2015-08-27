@@ -68,23 +68,29 @@ var ArticleList = React.createClass({
         return (
                 <ul className="ArticleList">
             {
-                this.state.archives.map(item => 
+                this.state.archives.map(item =>
             item._id ? (
                     <li key={item._id}>
-                        <article>
-                        <Link to="article" params={{id: item._id}}>
-                            <ArticleTitle className="title-list">{item.title || ''}</ArticleTitle>
-                        </Link>
+                        <article className="typo">
+                            <ArticleTitle className="title-list">
+                                <Link to="article" params={{id: item._id}}>
+                                    {item.title || ''}
+                                </Link>
+                            </ArticleTitle>
                         <div className="article-date">
                             {item.createDate && parseTime(item.createDate)[0] || ''}
                         </div>
 
-                        <ArticleText>{item.body || item.summary || ''}</ArticleText>
+                        <ArticleText>
+                            {item.body || item.summary || ''}
+                        </ArticleText>
                     </article>
                     </li>
             ) : (
                     <li>
-                        <ArticleText>{item.body || item.summary || ''}</ArticleText>
+                        <ArticleText>
+                            {item.body || item.summary || ''}
+                        </ArticleText>
                     </li>
             )
                 )

@@ -68,7 +68,22 @@ export var getEleTop = function (elem) {
     return actualTop;
 }
 
-export var parseTime = str => {
+export var parseTime = (str) => {
     str = str.split('T');
     return [str[0], str[1].split('.')[0]];
+}
+
+export var verticalTitle = (elem) => {
+    let e_arr = str.match(/(\w\s?)+/g)),
+        str = elem.innerHTML,
+        arr = [str],
+        e_w;
+    for (let i = 0; i < e_arr.length; i++) {
+        arr.concat(arr.pop().split(e_arr[i]));
+    }
+    str = '';
+    for (let i = 0; i < e_arr.length; i++) {
+        str += arr[i] + '<span style="transform:rotate()"
+    }
+
 }
