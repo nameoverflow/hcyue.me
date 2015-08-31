@@ -51,7 +51,7 @@ export var parseTime = (str) => {
 
 export var verticalTitle = (elem) => {
     let str = elem.innerHTML,
-        e_arr = str.match(/(\w\s?)+/g)),
+        e_arr = str.match(/(\w\s?)+/g),
         arr = [str],
         e_w;
     for (let i = 0; i < e_arr.length; i++) {

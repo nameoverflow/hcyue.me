@@ -5,9 +5,9 @@ let ArticleTitle = React.createClass({
     render() {
         return (
             <div className={this.props.className}>
-                <h2>
+                <h1>
                     {this.props.children}
-                </h2>
+                </h1>
             </div>
         );
     }
