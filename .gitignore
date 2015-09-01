@@ -6,3 +6,4 @@ view.ai
 .sass-cache/*
 *.swp
 .idea/
+src/style/sassCore/

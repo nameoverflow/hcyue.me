@@ -18,7 +18,7 @@ module.exports = (conn, params) ->
         # summary | title | all
     cur = db.find 'Post', {type: 'article'}
 
-    cur.sort({date: -1}).select('_id title tags createDate ' + (if type is 'summary' then 'summary' else if type is 'all' then 'body' else '')).skip(start).limit(limit)
+    cur.sort({date: 1}).select('_id title tags createDate ' + (if type is 'summary' then 'summary' else if type is 'all' then 'body' else '')).skip(start).limit(limit)
     ###
     switch type
         when 'summary'
@@ -34,8 +34,3 @@ module.exports = (conn, params) ->
                 message: err
             }
         conn.send 'json', row
-
-
-
-
-
