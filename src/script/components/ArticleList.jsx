@@ -35,14 +35,6 @@ var ArticleList = React.createClass({
             'limit': limit,
             'type': 'summary'
         }).then(data => {
-            if (data.err) {
-                let end_data = {
-                        body: data.message
-                    },
-                    new_list = this.state.archives.concat([end_data]);
-                this.setState({archives: new_list});
-                return;
-            }
             if (!data[0]) {
                 let end_data = {
                         body: 'The End'
@@ -59,7 +51,13 @@ var ArticleList = React.createClass({
                 archives: new_list,
                 num: this.state.num + limit
             });
-            console.log(this.state.archives);
+        }, (data) => {
+            let end_data = {
+                    body: data.message
+                },
+                new_list = this.state.archives.concat([end_data]);
+            this.setState({archives: new_list});
+            return;
         }).catch(data => {
             console.log(data);
         });

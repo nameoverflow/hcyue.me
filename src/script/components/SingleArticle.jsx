@@ -11,7 +11,7 @@ var SingleArticle = React.createClass({
         };
     },
 
-    componentDidMount() {
+    componentWillMount() {
         ajax.get('/api/article/get', {
             'id': this.props.params.id
         }).then(data => {
@@ -30,11 +30,17 @@ var SingleArticle = React.createClass({
                 body: data['body'],
                 editDate: data['editDate']
             });
+        }).then(() => {
+            let el = document.getElementsByClassName('title-single')[0];
+            let h = el.clientWidth;
+            el.style.top = h + 20 + 'px';
+
         }).catch(data => {
             console.log(data);
         });
     },
-
+    componentDidMount() {
+    },
     render() {
         return (
             <article className="SingleArticle typo">
