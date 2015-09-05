@@ -33,7 +33,7 @@ var SingleArticle = React.createClass({
         }).then(() => {
             let el = document.getElementsByClassName('title-single')[0];
             let h = el.clientWidth;
-            el.style.top = h + 20 + 'px';
+            el.style.top = h - 20 + 'px';
 
         }).catch(data => {
             console.log(data);
@@ -47,13 +47,17 @@ var SingleArticle = React.createClass({
                 <ArticleTitle className="title-single">
                     {this.state.title || ''}
                 </ArticleTitle>
-                <div className="article-date">
-                    {this.state.createDate && parseTime(this.state.createDate)[0] || ''}
-                </div>
                 <ArticleText>{this.state.body}</ArticleText>
                 <div
-                    className="edit-date"
-                    style={this.state.createDate === this.state.editDate ? {display: 'none'} : {}}>编辑于{this.state.editDate}</div>
+                    className="article-date"
+                    style={this.state.createDate === this.state.editDate ? {display: 'none'} : {}}>
+                    <p>
+                        Posted at {this.state.createDate && parseTime(this.state.createDate)[0] + ' ' + parseTime(this.state.createDate)[1] || ''}
+                    </p>
+                    <p>
+                        Edited at {this.state.editDate && parseTime(this.state.editDate)[0] + ' ' + parseTime(this.state.editDate)[1]}
+                    </p>
+                </div>
             </article>
         );
     }

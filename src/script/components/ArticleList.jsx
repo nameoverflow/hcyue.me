@@ -76,6 +76,7 @@ var ArticleList = React.createClass({
                                 </Link>
                             </ArticleTitle>
                         <div className="article-date">
+                            <i className="fa fa-calendar"></i>
                             {item.createDate && parseTime(item.createDate)[0] || ''}
                         </div>
 
