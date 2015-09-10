@@ -1,6 +1,5 @@
 module.exports = function (grunt) {
 
-    // 配置Grunt各种模块的参数
     grunt.initConfig({
         /*
         jshint: {},
@@ -11,10 +10,8 @@ module.exports = function (grunt) {
         watch: {
             scripts: {
                 files: [
-                    'src/script/**/*.js',
-                    'src/script/**/*.jsx',
-                    'src/script/*.js',
-                    'src/script/*.jsx'                    
+                    'src/**/script/*.js',
+                    'src/**/script/*.jsx'
                 ],
                 tasks: ['babel', 'browserify'],
                 options: {
@@ -23,10 +20,8 @@ module.exports = function (grunt) {
             },
             css: {
                 files: [
-                    'src/style/**/*.scss',
-                    'src/style/*.scss',
-                    'src/style/**/*.sass',
-                    'src/style/*.sass'
+                    'src/**/*.scss',
+                    'src/**/*.sass'
                 ],
                 tasks: ['sass'],
                 options: {
@@ -42,8 +37,8 @@ module.exports = function (grunt) {
             dist: {
                 files: [{
                     'expand': true,
-                    'cwd': 'src/script/',
-                    'src': ['**/*.js', '**/*.jsx'],
+                    'cwd': 'src/',
+                    'src': ['**/script/*.js', '**/script/*.jsx'],
                     'dest': 'build/',
                     'ext': '.js'
                 }]
@@ -51,14 +46,21 @@ module.exports = function (grunt) {
         },
         browserify: {
             build: {
-                src: 'build/main.js',
-                dest: 'public/script/main.js'
+                src: 'build/main/script/main.js',
+                dest: 'public/main/script/main.js'
+                // files: {
+                //     'expand': true,
+                //     'cwd': 'build/',
+                //     'src': '**/script/main.js',
+                //     'dest': 'public/',
+                //     'ext': '.js'
+                // }
             }
         },
         uglify: {
             com: {
-                src: 'public/script/main.js',
-                dest: 'public/script/main.min.js'
+                src: 'public/**/script/main.js',
+                dest: 'public/release/script/main.min.js'
             }
         },
         sass: {
@@ -69,33 +71,25 @@ module.exports = function (grunt) {
             dist: {
                 files: [{
                     'expand': true,
-                    'cwd': 'src/style/',
-                    'src': ['style.sass'],
-                    'dest': 'public/style/',
+                    'cwd': 'src/',
+                    'src': '**/style/style.sass',
+                    'dest': 'public/',
                     'ext': '.css'
                 }]
             }
         }
     });
 
-    // 从node_modules目录加载模块文件
-    /*
-    grunt.loadNpmTasks('grunt-contrib-jshint');
-    grunt.loadNpmTasks('grunt-contrib-concat');
-    */
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-sass');
     grunt.loadNpmTasks('grunt-babel');
     grunt.loadNpmTasks('grunt-browserify');
 
-    // 每行registerTask定义一个任务
-    // grunt.registerTask('default', ['jshint', 'concat', 'uglify']);
-    // grunt.registerTask('check', ['jshint']);
     grunt.registerTask('c', ['babel', 'browserify', 'sass']);
     grunt.registerTask('p', ['uglify']);
     grunt.registerTask('cp', ['babel', 'browserify', 'sass', 'uglify']);
-    
+
     grunt.registerTask('w', ['watch']);
 
 };

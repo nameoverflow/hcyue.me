@@ -11,9 +11,11 @@ app = new yue.app()
 ###
 Static file server
 ###
-staticFile = yue.static  
+staticFile = yue.static
 app.get '/static/*', staticFile 'public'
 
+app.get '/fck', (conn, params) ->
+    conn.send 'jump', '/'
 ###
 Main page
 ###
@@ -30,6 +32,3 @@ app.get '/api/article/get', get_article
 
 test = require './handler/api/test'
 app.get '/api/fuck', test
-
-
-
