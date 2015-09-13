@@ -9,10 +9,7 @@ module.exports = function (grunt) {
         */
         watch: {
             scripts: {
-                files: [
-                    'src/**/script/*.js',
-                    'src/**/script/*.jsx'
-                ],
+                files: ['script/**.js', 'script/**.jsx', 'script/**/*.js', 'script/**/*.jsx'],
                 tasks: ['babel', 'browserify'],
                 options: {
                     livereload: false,
@@ -38,7 +35,7 @@ module.exports = function (grunt) {
                 files: [{
                     'expand': true,
                     'cwd': 'src/',
-                    'src': ['**/script/*.js', '**/script/*.jsx'],
+                    'src': ['script/**.js', 'script/**.jsx', 'script/**/*.js', 'script/**/*.jsx'],
                     'dest': 'build/',
                     'ext': '.js'
                 }]
@@ -46,8 +43,8 @@ module.exports = function (grunt) {
         },
         browserify: {
             build: {
-                src: 'build/main/script/main.js',
-                dest: 'public/main/script/main.js'
+                src: 'build/script/main.js',
+                dest: 'public/script/main.js'
                 // files: {
                 //     'expand': true,
                 //     'cwd': 'build/',
@@ -59,7 +56,7 @@ module.exports = function (grunt) {
         },
         uglify: {
             com: {
-                src: 'public/**/script/main.js',
+                src: 'public/script/main.js',
                 dest: 'public/release/script/main.min.js'
             }
         },
@@ -72,7 +69,7 @@ module.exports = function (grunt) {
                 files: [{
                     'expand': true,
                     'cwd': 'src/',
-                    'src': '**/style/style.sass',
+                    'src': 'style/style.sass',
                     'dest': 'public/',
                     'ext': '.css'
                 }]

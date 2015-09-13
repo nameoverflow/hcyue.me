@@ -1,20 +1,10 @@
 db = require '../../model/db'
 query = require 'querystring'
-
+render = require '../../model/render'
 module.exports = (conn, params) ->
     conn.session (session) ->
-        if conn.request.method is 'GET'
-            if (session.get 'auth') isnt 'admin'
-                conn.send 'jump', '/admin/login'
-            else
-                conn.send 'html', 'admin!'
-
-        else if conn.request.method is 'POST'
-            console.log conn.body
-
-            conn.send 'html', 'POSTED!'
+        console.log session.get 'auth'
+        if (session.get 'auth') isnt 'admin'
+            conn.send 'jump', '/admin/login'
         else
-            conn.send 'err', {
-                err: 405,
-                message: '你是凯丁吗'
-            }
+            conn.send 'html', render './view/admin/list.jade'

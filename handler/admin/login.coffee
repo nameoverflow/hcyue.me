@@ -1,3 +1,20 @@
 render = require '../../model/render'
+acc = {
+    name: 'fucker'
+    passwd: '123'
+}
 module.exports = (conn, params) ->
-    conn.send 'html', render './view/admin_login.jade'
+    conn.session (session) ->
+        if (session.get 'auth') is 'admin'
+            conn.send 'jump', '/admin'
+            return
+        if conn.request.method is 'GET'
+            conn.send 'html', render './view/admin/login.jade'
+        else if conn.request.method is 'POST'
+            if conn.body['account'] is acc.name and conn.body['passwd'] is acc.passwd
+                session.set {'auth': 'admin'}
+                conn.send 'jump', '/admin'
+            else
+                conn.send 'html', render './view/admin/login.jade', {message: 'Login failed!'}
+        else
+            conn.send 'html', render './view/admin/login.jade', {message: '你是凯丁吗？'}

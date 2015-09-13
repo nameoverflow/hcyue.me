@@ -1,0 +1,32 @@
+main
+    position: absolute
+    margin: auto
+    left: 300px
+    right: 0
+
+a
+    text-decoration: none
+    color: inherit
+    &:visited, &:hover, &:active
+        color: inherit
+
+a:not(.no-ani)
+    position: relative
+    border-bottom: none
+    &::before
+        content: ""
+        position: absolute
+        width: 100%
+        height: 2px
+        bottom: 0px
+        left: 0px
+        background-color: #5B4947
+        visibility: hidden
+        transform: scaleX(0)
+        transition-duration: 0.2s
+        transition-timing-function: ease-in-out
+        transition-delay: 0s
+        visibility: hidden
+    &:hover::before
+        visibility: visible
+        transform: scaleX(1)
