@@ -7,3 +7,4 @@ view.ai
 *.swp
 .idea/
 **/sassCore/
+/tmp/
