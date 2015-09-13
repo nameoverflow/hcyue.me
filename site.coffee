@@ -11,16 +11,16 @@ app = new yue.app()
 ###
 Static file server
 ###
-staticFile = yue.static
-app.get '/static/*', staticFile 'public'
+staticFile = require 'yue/static'
+app.route '/static/*', staticFile 'public'
 
-app.get '/fck', (conn, params) ->
+app.route '/fck', (conn, params) ->
     conn.send 'jump', '/'
 ###
 Main page
 ###
 index = require './handler/main_page'
-app.get ['/', '/archives', '/lab', '/about', '/article/*'], index
+app.route ['/', '/archives', '/lab', '/about', '/article/*'], index
 
 
 ###
@@ -28,7 +28,16 @@ APIs
 ###
 
 get_article = require './handler/api/get_article'
-app.get '/api/article/get', get_article
+app.route '/api/article/get', get_article
 
 test = require './handler/api/test'
-app.get '/api/fuck', test
+app.route '/api/fuck', test
+
+###
+Admin
+###
+admin_index = require './handler/admin/list'
+app.route '/admin', admin_index
+
+admin_login = require './handler/admin/login'
+app.route '/admin/login', admin_login
