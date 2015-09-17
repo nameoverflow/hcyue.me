@@ -3,15 +3,13 @@ db = require '../../../model/db.coffee'
 module.exports = (conn, params) ->
     if conn.query
         if id = conn.query['id']
-            db.findById 'Post', id, (err, row) ->
+            return db.findById 'Post', id, (err, row) ->
                 if err
                     conn.send 'err', {
                         err: 500
                         message: err
                     }
                 conn.send 'json', row
-            return
-
         start = +conn.query['start'] || 0
         limit = +conn.query['limit'] || 1
         type = conn.query['type'] || 'all'

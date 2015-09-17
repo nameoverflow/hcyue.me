@@ -16,7 +16,10 @@ var ArticleList = React.createClass({
     },
     componentDidMount() {
         this.loadArchives();
-        window.addEventListener('scroll', this.scrollHandler);
+        window.addEventListener('scroll', this.scrollHandler, false);
+    },
+    componentWillUnmount() {
+        window.removeEventListener('scroll', this.scrollHandler, false);
     },
     scrollHandler() {
         let cur_scroll = document.body.scrollTop || document.documentElement.scrollTop,
@@ -26,7 +29,7 @@ var ArticleList = React.createClass({
             this.loadArchives(num);
         }
         if (this.state.end) {
-            window.removeEventListener('scroll', this.scrollHandler);
+            window.removeEventListener('scroll', this.scrollHandler, false);
         }
     },
     loadArchives(start=0, limit=10) {

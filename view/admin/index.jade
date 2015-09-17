@@ -1,0 +1,24 @@
+doctype html
+html(lang="zh-cn")
+    head
+        title Admin Index
+        link(rel="stylesheet", href="/static/style/cat.css")
+        link(rel="stylesheet", href="/static/style/admin.css")
+    body.cat
+        main.cat-g.main
+            .col-md-3-4.col-offset-1-8
+                .card
+                    .card-head.blue
+                        h3 Admin
+                    .card-body
+                        p= message
+                        a.button.button-pill.button-border.button-large.no-ani(href="/admin/logout") Logout
+                        a.button.button-pill.button-border.button-large.no-ani(href="/admin/edit/new") New Post
+                        
+                        div
+                            ul#article-list
+                            .button.button-pill.button-border.button-large#more Load More
+        script(src="/static/script/admin.js")
+        script.
+            document.getElementById('more').addEventListener('click', loader, false);
+            loader();

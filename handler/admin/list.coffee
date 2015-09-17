@@ -3,8 +3,7 @@ query = require 'querystring'
 render = require '../../model/render'
 module.exports = (conn, params) ->
     conn.session (session) ->
-        console.log session.get 'auth'
         if (session.get 'auth') isnt 'admin'
             conn.send 'jump', '/admin/login'
         else
-            conn.send 'html', render './view/admin/list.jade'
+            conn.send 'html', render './view/admin/index.jade'

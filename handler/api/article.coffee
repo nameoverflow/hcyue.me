@@ -1,10 +1,10 @@
 get = require './article/get.coffee'
+edit = require './article/edit.coffee'
 
 module.exports = (conn, params) ->
     handler =
         'GET': get
-        'POST': (conn, params) ->
-            conn.send 'html', 'posted'
+        'POST': edit
         'PUT': (conn, params) ->
             conn.send 'html', 'puted'
         'DELETE': (conn, params) ->

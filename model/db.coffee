@@ -27,6 +27,7 @@ postSchema = new Schema {
     title: String
     summary: String
     body: String
+    bodySource: String
     createDate: {
         type: Date
         default: Date.now
@@ -35,40 +36,32 @@ postSchema = new Schema {
         type: Date
         default: Date.now
     }
-    tags: [String]
+    tags: {
+        type: [String]
+        default: []
+    }
     ###
     type: 'article'|'page'
     ###
-    type: String
+    type:  {
+        type: String
+        default: 'article'
+    }
 }
 
 mong.model 'Post', postSchema
 
-module.exports.findById = findById = (model_name, id, callback) ->
-
-    (mong.model model_name).findOne {_id: id}, (err, doc) ->
-        if err
-            callback err, null
-            return
-        callback null, doc
-
+module.exports.findById = (model_name, id, callback) ->
+    (mong.model model_name).findOne {_id: id}, callback
 
 module.exports.add = (model_name, data, callback) ->
-    newDoc = new (mong.model model_name)(data)
-    newDoc.save (err, doc) ->
-        if err
-            callback err, null
-            return
-        callback null, doc
+    (mong.model model_name).create data, callback
 
 module.exports.find = (model_name, condi, callback) ->
-    return (mong.model model_name).find condi
+    (mong.model model_name).find condi
 
 module.exports.update = (model_name, condi, data, callback) ->
-    data['editDate'] = new Date()
-    (mong.model model_name).update condi, data, (err, raw) ->
-        if err
-            callback err, null
-            return
-        callback null, raw
+    (mong.model model_name).update condi, data, callback
 
+module.exports.rm = (model_name, condi, callback) ->
+    (mong.model model_name).remove condi, callback

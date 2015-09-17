@@ -8,7 +8,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
-  "devDependencies": {
+  "dependencies": {
     "babelify": "^6.3.0",
     "grunt": "0.x.x",
     "grunt-babel": "*",
@@ -19,6 +19,7 @@
     "grunt-contrib-uglify": "~0.1.0",
     "grunt-contrib-watch": "~0.1.4",
     "mongoose": "*",
-    "yue": "*"
+    "yue": "*",
+    "marked": "^0.3.5"
   }
 }

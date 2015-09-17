@@ -7,4 +7,5 @@ view.ai
 *.swp
 .idea/
 **/sassCore/
-/tmp/
+tmp/
+code/yue-blog/src/style/typo.css

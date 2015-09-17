@@ -27,8 +27,11 @@ app.route ['/', '/archives', '/lab', '/about', '/article/*'], index
 APIs
 ###
 
-get_article = require './handler/api/article'
-app.route '/api/article', get_article
+article = require './handler/api/article'
+app.route '/api/article', article
+
+article_del = require './handler/api/article/del'
+app.route '/api/article/del', article_del
 
 test = require './handler/api/test'
 app.route '/api/fuck', test
@@ -44,3 +47,6 @@ app.route '/admin/login', admin_login
 
 admin_logout = require './handler/admin/logout'
 app.route '/admin/logout', admin_logout
+
+admin_edit = require './handler/admin/edit'
+app.route '/admin/edit/{post}', admin_edit

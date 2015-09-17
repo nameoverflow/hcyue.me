@@ -1,0 +1,27 @@
+doctype html
+html(lang="zh-cn")
+    head
+        title Edit Post
+        link(rel="stylesheet", href="/static/style/cat.css")
+        link(rel="stylesheet", href="/static/style/admin.css")
+    body.cat
+        main.cat-g.main
+            .col-md-2-3.col-offset-1-6
+                .card
+                    .card-head.blue
+                        h3 Edit
+                    .card-body
+                        p= message
+                        form(action="/api/article?post=" + post, method="post")
+                            div#edit-area
+                                input#title(type="text", placeholder="Title", name="title", value=title)
+                                div#content
+                                    pre#content-p
+                                    textarea#content-a(name="body")= content
+                            input.button.button-pill.button-border.button-large#sub(type="submit", value="Submit")
+        script.
+            document.getElementById('content-a').addEventListener('keyup', function () {
+                el = document.getElementById('content-p');
+                str = document.getElementById('content-a').value;
+                el.innerHTML = str;
+            });
