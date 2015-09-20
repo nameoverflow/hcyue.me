@@ -1,8 +1,9 @@
 // import React from 'react';
 import {ajax, getEleTop, parseTime} from '../utils';
 
-import ArticleTitle from './ArticleTitle';
-import ArticleText from './ArticleText';
+// import ArticleTitle from './ArticleTitle';
+// import ArticleText from './ArticleText';
+import ArticleList from './ArticleList'
 
 var Link = ReactRouter.Link
 
@@ -15,7 +16,7 @@ var ArticleList = React.createClass({
         };
     },
     componentDidMount() {
-        this.loadArchives();
+        this.loadArticles(this.props.type || 'summary');
         window.addEventListener('scroll', this.scrollHandler, false);
     },
     componentWillUnmount() {
@@ -26,41 +27,32 @@ var ArticleList = React.createClass({
             height = document.body.offsetHeight,
             win_height = window.innerHeight;
         if (win_height - cur_scroll < win_height + 100) {
-            this.loadArchives(num);
+            this.loadArticles(this.props.type || 'summary', this.state.num);
         }
-        if (this.state.end) {
+        if (!this.state.end) {
             window.removeEventListener('scroll', this.scrollHandler, false);
         }
     },
-    loadArchives(start=0, limit=10) {
+    loadArticles(type, start=0, limit=10) {
         ajax.get('/api/article', {
             'start': start,
             'limit': limit,
-            'type': 'summary'
+            'type': type
         }).then(data => {
+            let end = false;
             if (!data[0]) {
-                let end_data = {
-                        body: 'The End'
-                    },
-                    new_list = this.state.archives.concat([end_data]);
-                this.setState({
-                    end: true,
-                    archives: new_list
-                });
-                return;
+                end = true;
+                data = []
             }
-            let new_list = this.state.archives.concat(data);
             this.setState({
-                archives: new_list,
-                num: this.state.num + limit
+                archives: this.state.archives.concat(data),
+                num: this.state.num + limit,
+                end: end
             });
         }, (data) => {
-            let end_data = {
-                    body: data.message
-                },
-                new_list = this.state.archives.concat([end_data]);
-            this.setState({archives: new_list});
-            return;
+            return this.setState({
+                archives: this.state.archives.concat({body: data.message})
+            });
         }).catch(data => {
             console.log(data);
         });
@@ -70,7 +62,6 @@ var ArticleList = React.createClass({
                 <ul className="ArticleList">
             {
                 this.state.archives.map(item =>
-            item._id ? (
                     <li key={item._id}>
                         <article className="typo">
                             <ArticleTitle className="title-list">
@@ -78,25 +69,22 @@ var ArticleList = React.createClass({
                                     {item.title || ''}
                                 </Link>
                             </ArticleTitle>
-                        <div className="article-date">
-                            <i className="fa fa-calendar"></i>
-                            {item.createDate && parseTime(item.createDate)[0] || ''}
+                        <div className="article-meta">
+                            创建于 {item.createDate && parseTime(item.createDate)[0] || ''} | {item.tags.map(tag => <a href="#">{` {${tag}} `}</a>)}
                         </div>
 
                         <ArticleText>
-                            {item.body || item.summary || ''}
+                            {item.summary}
                         </ArticleText>
                     </article>
                     </li>
-            ) : (
-                    <li>
-                        <ArticleText>
-                            {item.body || item.summary || ''}
-                        </ArticleText>
-                    </li>
-            )
                 )
             }
+                    <li id="end-list" style={this.state.end ? {display: 'block'} : {display: 'none'}}>
+                        <div>
+                            The End
+                        </div>
+                    </li>
                 </ul>
 
         );

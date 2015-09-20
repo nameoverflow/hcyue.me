@@ -14,7 +14,9 @@ var Main = React.createClass({
             <div id='container'>
                 <HeaderNav/>
                 <main>
-                    <RouteHandler/>
+                    <div id="wrapper">
+                        <RouteHandler/>
+                    </div>
                 </main>
             </div>
         );

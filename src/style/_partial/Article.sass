@@ -1,6 +1,6 @@
 $nav_width: 300px
 $main_inside: 20px
-$article_width: 1000px
+$article_margin: 10%
 
 .ArticleList
     padding: 0
@@ -8,48 +8,59 @@ $article_width: 1000px
     li
         list-style: none
     article
-        margin: 30px auto 0 auto
+        padding-top: 2rem
+        padding-bottom: 3rem
+    #end-list
+        text-align: center
+        color: #999
+        padding-bottom: 1em
 
 article
     position: relative
-    max-width: $article_width
-    width: 80%
+    //max-width: $article_width
+    width: auto
+    padding-left: $article_margin
+    padding-right: $article_margin
 
 .SingleArticle
-    margin: 80px auto 0 auto
+    padding-top: 34px
 
 
 .title-list, .title-single
     h1
         margin: 0
-        color: #5B4947
-        font-family: 'PingFang SC', 'Lantinghei SC', 'Microsoft Yahei', 'Hiragino Sans GB', 'Microsoft Sans Serif', 'WenQuanYi Micro Hei', sans
+        color: #111
+        font-family: "Microsoft JhengHei", 'PingFang SC', 'Lantinghei SC', 'Microsoft Yahei', 'Hiragino Sans GB', 'Microsoft Sans Serif', 'WenQuanYi Micro Hei', sans
 
 
 .title-list
-    padding-bottom: 10px
+    padding-bottom: 5px
     padding-top: 5px
 
 .title-single
     position: absolute
-    right: -2em
+    right: 3rem
     transform: rotate(90deg)
     transform-origin: right center
+
+    // writing-mode: vertical-rl
+    // -webkit-writing-mode: vertical-rl
+
     h1
-        font-size: 50px
+        font-size: 2em
         text-align: right
 
-.article-date
+.article-meta
     font-size: 0.8rem
     color: #bbb
     p
         margin-bottom: 5px
-.ArticleList .article-date
-    padding-bottom: 1em
+.ArticleList .article-meta
+    padding-bottom: 0.5em
     i
-        margin-right: 0.5em
+        margin-right: 0.3em
 
-.SingleArticle .article-date
+.SingleArticle .article-meta
     text-align: right
     p
         margin-right: 3em

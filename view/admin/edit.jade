@@ -15,13 +15,16 @@ html(lang="zh-cn")
                         form(action="/api/article?post=" + post, method="post")
                             div#edit-area
                                 input#title(type="text", placeholder="Title", name="title", value=title)
+                                input#tags(type="text", placeholder="Tags using ; to split", name="tags", value=tags)
                                 div#content
                                     pre#content-p
                                     textarea#content-a(name="body")= content
                             input.button.button-pill.button-border.button-large#sub(type="submit", value="Submit")
         script.
-            document.getElementById('content-a').addEventListener('keyup', function () {
+            var fuck = function () {
                 el = document.getElementById('content-p');
                 str = document.getElementById('content-a').value;
                 el.innerHTML = str;
-            });
+            };
+            document.getElementById('content-a').addEventListener('keyup', fuck);
+            fuck();

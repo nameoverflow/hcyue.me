@@ -19,7 +19,7 @@ app.route '/fck', (conn, params) ->
 ###
 Main page
 ###
-index = require './handler/main_page'
+index = require './handler/main'
 app.route ['/', '/archives', '/lab', '/about', '/article/*'], index
 
 
