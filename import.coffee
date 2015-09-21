@@ -1,4 +1,7 @@
+fs = require 'fs'
+yaml = require 'js-yaml'
 mong = require 'mongoose'
+marked = require 'marked'
 
 db_uri = 'mongodb://localhost/blog'
 
@@ -55,17 +58,32 @@ postSchema = new Schema {
 
 mong.model 'Post', postSchema
 
-module.exports.findById = (model_name, id, callback) ->
-    (mong.model model_name).findOne {_id: id}, callback
+Post = mong.model 'Post'
 
-module.exports.add = (model_name, data, callback) ->
-    (mong.model model_name).create data, callback
+files = fs.readdirSync './_posts'
 
-module.exports.find = (model_name, condi, callback) ->
-    (mong.model model_name).find condi
+for i in files
 
-module.exports.update = (model_name, condi, data, callback) ->
-    (mong.model model_name).update condi, data, callback
+    data = fs.readFileSync './_posts/'+ i, 'utf8'
+    parts = data.split '\n---\n'
 
-module.exports.rm = (model_name, condi, callback) ->
-    (mong.model model_name).remove condi, callback
+    info = yaml.safeLoad parts[0]
+    body = parts[1]
+
+    summ = (body.split '<!--more-->')[0]
+
+    post_data =
+        'title': info['title']
+        'createDate': info['date']
+        'body': marked body
+        'bodySource': body
+        'summary': marked summ
+        'type': 'article'
+        'tags': info['tags'] || []
+        'break': if (body.split '<!--more-->')[1] then true else false
+
+    Post.create post_data
+    console.log "#{info['title']} finished"
+
+mong.disconnect()
+

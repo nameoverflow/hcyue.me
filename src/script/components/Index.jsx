@@ -1,5 +1,5 @@
 // import React from 'react';
-import {ajax, getEleTop, parseTime, getArticles} from '../utils';
+import {ajax, getEleTop, parseTime, getArticles, getScrollHeight} from '../utils';
 
 // import ArticleTitle from './ArticleTitle';
 // import ArticleText from './ArticleText';
@@ -14,25 +14,27 @@ var Index = React.createClass({
         };
     },
     componentDidMount() {
-        this.load(this.props.type || 'summary');
-        window.addEventListener('scroll', this.scrollHandler, false);
+        this.load('summary');
+        window.addEventListener('scroll', this.handleScroll);
+        // console.log(window.innerHeight, getScrollHeight());
     },
     componentWillUnmount() {
-        window.removeEventListener('scroll', this.scrollHandler, false);
+        window.removeEventListener('scroll', this.handleScroll);
     },
-    scrollHandler() {
+    handleScroll() {
         let cur_scroll = document.body.scrollTop || document.documentElement.scrollTop,
-            height = document.body.offsetHeight,
-            win_height = window.innerHeight;
-        if (win_height - cur_scroll < win_height + 100) {
-            this.load(this.props.type || 'summary', this.state.loaded);
+            height = getScrollHeight(),
+            active_height = window.innerHeight * 1.2;
+        // console.log(height - cur_scroll, win_height + 100);
+        if (height - cur_scroll < active_height) {
+            this.load('summary', this.state.loaded);
         }
-        if (!this.state.end) {
-            window.removeEventListener('scroll', this.scrollHandler, false);
+        if (this.state.end) {
+            window.removeEventListener('scroll', this.handleScroll);
         }
     },
     load(type, start=0, limit=10) {
-        getArticles(type, start, limit).then(data => {
+        return getArticles(type, start, limit).then(data => {
             let end = false;
             if (!data[0]) {
                 end = true;

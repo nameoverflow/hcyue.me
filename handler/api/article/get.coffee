@@ -15,7 +15,7 @@ module.exports = (conn, params) ->
         type = conn.query['type'] || 'all'
         # summary | title | all
     cur = db.find 'Post', {type: 'article'}
-    cnt_str = if type is 'summary' then 'summary' else if type is 'all' then 'body' else ''
+    cnt_str = if type is 'summary' then 'summary break' else if type is 'all' then 'body editDate' else ''
     cur.sort({createDate: -1}).select("_id title tags createDate #{cnt_str}").skip(start).limit(limit)
 
     cur.exec (err, row) ->

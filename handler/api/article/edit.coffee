@@ -22,7 +22,8 @@ module.exports = (conn, params) ->
                 'title': conn.body['title']
                 'body': marked conn.body['body']
                 'bodySource': conn.body['body']
-                'summary': marked conn.body['body'].substr 0, 150
+                'summary': marked (conn.body['body'].split '<!--more-->')[0]
+                'break': if (conn.body['body'].split '<!--more-->')[1] then true else false
             if conn.body['type'] then post_data['type'] = conn.body['type']
             if conn.body['tags'] then post_data['tags'] = conn.body['tags'].split(';')
 
