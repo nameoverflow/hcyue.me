@@ -3,7 +3,6 @@
 var Link = ReactRouter.Link
 var menu = ['home', 'archives', 'lab', 'about'];
 var NavBtn =  React.createClass({
-
     render() {
         return (
             <Link to={this.props.name} className="NavBtn">
@@ -24,7 +23,7 @@ var HeaderNav = React.createClass({
                 </div>
                 <ul>
             {
-                menu.map(item => 
+                menu.map(item =>
                     <li>
                         <NavBtn key={item} name={item}/>
 

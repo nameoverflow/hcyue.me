@@ -14,8 +14,8 @@ Static file server
 staticFile = require 'yue/static'
 app.route '/static/*', staticFile 'public'
 
-app.route '/fck', (conn, params) ->
-    conn.send 'jump', '/'
+app.route '/favicon.ico', (conn, params) ->
+    conn.send 'jump', '/static/favicon.ico'
 ###
 Main page
 ###
@@ -32,9 +32,6 @@ app.route '/api/article', article
 
 article_del = require './handler/api/article/del'
 app.route '/api/article/del', article_del
-
-test = require './handler/api/test'
-app.route '/api/fuck', test
 
 ###
 Admin

@@ -67,3 +67,11 @@ export var verticalTitle = (elem) => {
     str += arr[e_arr.length];
     elem.innerHTML = str;
 }
+
+export var getArticles = function (type, start=0, limit=10) {
+    return ajax.get('/api/article', {
+        'start': start,
+        'limit': limit,
+        'type': type
+    });
+};

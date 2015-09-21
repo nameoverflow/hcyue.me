@@ -39,20 +39,22 @@ var SingleArticle = React.createClass({
     },
     render() {
         return (
-            <article className="SingleArticle typo" style={{'min-height': this.state.mh}}>
-                <ArticleTitle className="title-single">
-                    {this.state.title || ''}
-                </ArticleTitle>
-                <ArticleText>{this.state.body}</ArticleText>
-                <div className="article-meta">
-                    <p>
-                        Posted at {this.state.createDate && parseTime(this.state.createDate)[0] + ' ' + parseTime(this.state.createDate)[1] || ''}
-                    </p>
-                    <p style={this.state.createDate === this.state.editDate ? {display: 'none'} : {}}>
-                        Edited at {this.state.editDate && parseTime(this.state.editDate)[0] + ' ' + parseTime(this.state.editDate)[1]}
-                    </p>
-                </div>
-            </article>
+            <div id="wrapper">
+                <article className="SingleArticle typo" style={{'min-height': this.state.mh}}>
+                    <ArticleTitle className="title-single">
+                        {this.state.title || ''}
+                    </ArticleTitle>
+                    <ArticleText>{this.state.body}</ArticleText>
+                    <div className="article-meta">
+                        <p>
+                            Posted at {this.state.createDate && parseTime(this.state.createDate)[0] + ' ' + parseTime(this.state.createDate)[1] || ''}
+                        </p>
+                        <p style={this.state.createDate === this.state.editDate ? {display: 'none'} : {}}>
+                            Edited at {this.state.editDate && parseTime(this.state.editDate)[0] + ' ' + parseTime(this.state.editDate)[1]}
+                        </p>
+                    </div>
+                </article>
+            </div>
         );
     }
 });

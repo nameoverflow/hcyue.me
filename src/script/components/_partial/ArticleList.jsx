@@ -1,6 +1,6 @@
 import ArticleTitle from './ArticleTitle';
 import ArticleText from './ArticleText';
-
+import {parseTime} from '../../utils'
 var Link = ReactRouter.Link
 
 var ArticleList = React.createClass({
@@ -16,14 +16,13 @@ var ArticleList = React.createClass({
                                     {item.title || ''}
                                 </Link>
                             </ArticleTitle>
-                        <div className="article-meta">
-                            创建于 {item.createDate && parseTime(item.createDate)[0] || ''} | {item.tags.map(tag => <a href="#">{` {${tag}} `}</a>)}
-                        </div>
-
-                        <ArticleText>
-                            {item.summary}
-                        </ArticleText>
-                    </article>
+                            <div className="article-meta">
+                                创建于 {item.createDate && parseTime(item.createDate)[0] || ''} | {item.tags.map(tag => <a href="#">{` {${tag}} `}</a>)}
+                            </div>
+                            <ArticleText>
+                                {item.summary}
+                            </ArticleText>
+                        </article>
                     </li>
                 )
             }
