@@ -11,7 +11,8 @@ db.on 'connnected', () ->
     console.log 'Mongoose connected'
 
 db.on 'disconnnected', () ->
-    console.log 'Mongoose disconnected'
+    console.log 'Mongoose disc    summary: String
+onnected'
 
 
 process.on 'SIGINT', () ->
@@ -52,7 +53,6 @@ postSchema = new Schema {
         default: false
     }
 }
-
 mong.model 'Post', postSchema
 
 module.exports.findById = (model_name, id, callback) ->

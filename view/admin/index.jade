@@ -12,8 +12,11 @@ html(lang="zh-cn")
                         h3 Admin
                     .card-body
                         p= message
-                        a.button.button-pill.button-border.button-large.no-ani(href="/admin/logout") Logout
-                        a.button.button-pill.button-border.button-large.no-ani(href="/admin/edit/new") New Post
+                        .cat-g
+                            .col-1-2
+                                a.button.button-pill.button-border.button-large.no-ani(href="/admin/logout") Logout
+                            .col-1-2
+                                a.button.button-pill.button-border.button-large.no-ani(href="/admin/edit/new") New Post
                         
                         div
                             ul#article-list

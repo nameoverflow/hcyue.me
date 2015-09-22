@@ -33,6 +33,9 @@ app.route '/api/article', article
 article_del = require './handler/api/article/del'
 app.route '/api/article/del', article_del
 
+time = require './handler/api/time'
+app.route '/api/time', time
+
 ###
 Admin
 ###
