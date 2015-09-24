@@ -30,11 +30,11 @@ postSchema = new Schema {
     body: String
     bodySource: String
     createDate: {
-        type: Date
+        type: Number
         default: Date.now
     }
     editDate: {
-        type: Date
+        type: Number
         default: Date.now
     }
     tags: {

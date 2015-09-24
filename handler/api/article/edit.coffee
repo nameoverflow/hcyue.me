@@ -31,5 +31,5 @@ module.exports = (conn, params) ->
                 db.add 'Post', post_data, dbCb
             else
                 post_id = conn.query['post']
-                post_data['editDate'] = new Date()
+                post_data['editDate'] = Date.now()
                 db.update 'Post', {_id: post_id}, post_data, dbCb

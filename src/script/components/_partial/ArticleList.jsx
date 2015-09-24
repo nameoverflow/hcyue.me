@@ -19,7 +19,8 @@ var ArticleList = React.createClass({
                                 </ArticleTitle>
                                 <div className="article-meta">
                                     创建于 {
-                                        item.createDate && parseTime(item.createDate)[0] || ''
+                                        //item.createDate && parseTime(item.createDate)[0] || ''
+                                        new Date(item.createDate).toDateString()
                                     } | {
                                         item.tags === [] ? 'None' : item.tags.map(tag =>
                                             <a href="#">

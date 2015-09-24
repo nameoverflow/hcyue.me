@@ -74,7 +74,7 @@ for i in files
 
     post_data =
         'title': info['title']
-        'createDate': info['date']
+        'createDate': info['date'].getTime()
         'body': marked body
         'bodySource': body
         'summary': marked summ
@@ -86,4 +86,3 @@ for i in files
     console.log "#{info['title']} finished"
 
 mong.disconnect()
-
