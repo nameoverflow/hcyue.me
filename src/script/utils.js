@@ -87,3 +87,19 @@ export var getScrollHeight = function () {
 　　scrollHeight = (bodyScrollHeight - documentScrollHeight > 0) ? bodyScrollHeight : documentScrollHeight;
 　　return scrollHeight;
 }
+
+export var heightTrans = function(elem, time) { // time, 数值，可缺省
+    if (typeof window.getComputedStyle == "undefined") return;
+
+    let height = window.getComputedStyle(elem).height;
+
+    //elem.style.transition = "none";    // 本行2015-05-20新增，mac Safari下，貌似auto也会触发transition, 故要none下~
+
+    elem.style.height = "auto";
+    let targetHeight = window.getComputedStyle(elem).height;
+    elem.style.height = height;
+    setTimeout(() => {
+        if (time) elem.style.transition = "height "+ time +"ms ease-in-out";
+        elem.style.height = targetHeight;
+    }, 5);
+};

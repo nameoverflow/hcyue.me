@@ -3,6 +3,7 @@ import {ajax, parseTime} from '../utils';
 
 import ArticleTitle from './_partial/ArticleTitle';
 import ArticleText from './_partial/ArticleText';
+import ArticleMeta from './_partial/ArticleMeta';
 
 var SingleArticle = React.createClass({
     getInitialState() {
@@ -18,12 +19,7 @@ var SingleArticle = React.createClass({
             if (!data) {
                 return this.setState({body: 'id not found!'});
             }
-            this.setState({
-                title: data['title'],
-                createDate: data['createDate'],
-                body: data['body'],
-                editDate: data['editDate']
-            });
+            this.setState(data);
         }, data => {
             return this.setState({body: data.message});
         }).then(() => {
@@ -40,19 +36,12 @@ var SingleArticle = React.createClass({
     render() {
         return (
             <div id="wrapper">
-                <article className="SingleArticle typo" style={{'min-height': this.state.mh}}>
+                <article className="SingleArticle typo" style={{'minHeight': this.state.mh}}>
                     <ArticleTitle className="title-single">
                         {this.state.title || ''}
                     </ArticleTitle>
                     <ArticleText>{this.state.body}</ArticleText>
-                    <div className="article-meta">
-                        <p>
-                            Posted at {this.state.createDate && parseTime(this.state.createDate)[0] + ' ' + parseTime(this.state.createDate)[1] || ''}
-                        </p>
-                        <p style={this.state.createDate === this.state.editDate ? {display: 'none'} : {}}>
-                            Edited at {this.state.editDate && parseTime(this.state.editDate)[0] + ' ' + parseTime(this.state.editDate)[1]}
-                        </p>
-                    </div>
+                    <ArticleMeta time={this.state.createDate} tags={this.state.tags} />
                 </article>
             </div>
         );

@@ -1,5 +1,5 @@
 import {ajax} from '../utils'
-import Timeline from './_partial/TimeLine'
+import TimeLine from './_partial/TimeLine'
 
 var Archives = React.createClass({
     getInitialState() {
@@ -8,23 +8,28 @@ var Archives = React.createClass({
         };
     },
     componentDidMount() {
-        loadTimeLine();
+        this.loadTimeLine();
     },
     loadTimeLine() {
         return ajax.get('/api/time').then(data =>
             this.setState({
                 years: data
             })
+            // console.log(data);
+        ).catch(e =>
+            console.log(e)
         );
     },
     render() {
-        <div id="wrapper">
-    {
-        this.state.years.map((year) =>
-            <TimeLine time={`year`} />
+        return (
+            <div id="wrapper">
+        {
+            this.state.years.map(year =>
+                <TimeLine time={year} />
+            )
+        }
+            </div>
         )
-    }
-        </div>
     }
 });
 

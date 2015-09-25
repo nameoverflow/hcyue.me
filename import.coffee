@@ -32,11 +32,11 @@ postSchema = new Schema {
     body: String
     bodySource: String
     createDate: {
-        type: Date
+        type: Number
         default: Date.now
     }
     editDate: {
-        type: Date
+        type: Number
         default: Date.now
     }
     tags: {
@@ -82,7 +82,9 @@ for i in files
         'tags': info['tags'] || []
         'break': if (body.split '<!--more-->')[1] then true else false
 
-    Post.create post_data
-    console.log "#{info['title']} finished"
+    console.log info['date'].getTime()
+    # Post.create post_data, (err, doc) =>
+    #     console.log "#{info['title']} finished"
+    #     console.log "#{doc}"
 
 mong.disconnect()

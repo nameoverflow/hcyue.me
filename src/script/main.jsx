@@ -4,6 +4,7 @@
 import HeaderNav from './components/HeaderNav';
 import SingleArticle from './components/SingleArticle';
 import Index from './components/Index';
+import Archives from './components/Archives';
 
 var Router = window.ReactRouter
 var RouteHandler = Router.RouteHandler;
@@ -13,7 +14,7 @@ var Main = React.createClass({
         return (
             <div id='container'>
                 <HeaderNav/>
-                <main>
+                <main id='page-main'>
                     <RouteHandler/>
                 </main>
             </div>
@@ -27,7 +28,7 @@ var DefaultRoute = Router.DefaultRoute;
 var routes = (
     <Route handler={Main} path='/'>
         <Route handler={Index} name='home' path="/"/>
-        <Route handler={Index} name='archives' path="archives"/>
+        <Route handler={Archives} name='archives' path="archives"/>
         <Route handler={Index} name='lab' path="lab"/>
         <Route handler={Index} name='about' path="about"/>
         <Route handler={SingleArticle} name='article' path="article/:id"/>

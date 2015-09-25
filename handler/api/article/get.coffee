@@ -5,9 +5,9 @@ module.exports = (conn, params) ->
         type: 'article'
     if conn.query
         if id = conn.query['id']
-            return db.findById 'Post', id, (err, row) ->
+            return db.findById 'Post', id, (err, row) =>
                 if err
-                    conn.send 'err', {
+                    conn.die {
                         err: 500
                         message: err
                     }
@@ -23,16 +23,17 @@ module.exports = (conn, params) ->
             query_data['createDate']['$gte'] = +conn.query['st']
         if conn.query['et']
             query_data['createDate']['$lte'] = +conn.query['et']
-    console.log query_data
+
     cur = db.find 'Post', query_data
     cnt_str = if type is 'summary' then 'summary break' else if type is 'all' then 'body editDate' else ''
     cur.sort({createDate: -1})
         .select("_id title tags createDate #{cnt_str}")
         .skip(start)
-        .limit(limit)
-        .exec (err, row) ->
+    if not query_data['createDate']
+        cur.limit(limit)
+    cur.exec (err, row) =>
             if err
-                conn.send 'err', {
+                conn.die {
                     err: 500
                     message: err
                 }

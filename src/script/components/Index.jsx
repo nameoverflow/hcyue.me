@@ -60,7 +60,7 @@ var Index = React.createClass({
                     {this.state.archives}
                 </ArticleList>
                 <article id="end-list" style={{'display': this.state.end ? 'block' : 'none'}}>
-                    The End
+                    {this.state.end ? 'The End' : 'Loading....'}
                 </article>
             </div>
         );

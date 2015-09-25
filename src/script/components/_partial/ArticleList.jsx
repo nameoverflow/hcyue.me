@@ -1,5 +1,6 @@
 import ArticleTitle from './ArticleTitle';
 import ArticleText from './ArticleText';
+import ArticleMeta from './ArticleMeta';
 import {parseTime} from '../../utils'
 var Link = ReactRouter.Link
 
@@ -12,32 +13,28 @@ var ArticleList = React.createClass({
                     <li key={item._id}>
                         <article className="typo">
                             <header>
-                                <ArticleTitle className="title-list">
+                                <ArticleTitle display={this.props.display} className="title-list">
                                     <Link to="article" params={{id: item._id}}>
                                         {item.title || ''}
                                     </Link>
                                 </ArticleTitle>
-                                <div className="article-meta">
-                                    创建于 {
-                                        //item.createDate && parseTime(item.createDate)[0] || ''
-                                        new Date(item.createDate).toDateString()
-                                    } | {
-                                        item.tags === [] ? 'None' : item.tags.map(tag =>
-                                            <a href="#">
-                                                {` {${tag}} `}
-                                            </a>
-                                        )
-                                    }
-                                </div>
+                                <ArticleMeta time={item.createDate} tags={item.tags} />
                             </header>
-                            <ArticleText>
-                                {item.summary || item.body}
-                            </ArticleText>
-                            <div className="post-more-link" style={{'display': item.break ? 'block' : 'none'}}>
-                                <Link to="article" params={{id: item._id}} className="no-ani">
-                                    ReadOn »
-                                </Link>
-                            </div>
+                        {
+                        this.props.display == 'title' ||
+                            <main>
+                                <ArticleText>
+                                    {item.summary || item.body}
+                                </ArticleText>
+                                <div className="post-more-link" style={{
+                                    'display': item.break ? 'block' : 'none'
+                                }}>
+                                    <Link to="article" params={{id: item._id}} className="no-ani">
+                                        ReadOn »
+                                    </Link>
+                                </div>
+                            </main>
+                        }
                         </article>
                     </li>
                 )

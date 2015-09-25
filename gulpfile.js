@@ -13,6 +13,7 @@ gulp.task('compile', function() {
     })
     .transform(babelify)
     .bundle()
+    .on('error', swallowError)
     .pipe(source('main.js'))
     .pipe(gulp.dest('./public/script'));
     console.log("main.js Completed");
@@ -23,6 +24,7 @@ gulp.task('compile', function() {
     })
     .transform(babelify)
     .bundle()
+    .on('error', swallowError)
     .pipe(source('admin.js'))
     .pipe(gulp.dest('./public/script'));
     console.log("admin.js Completed");
@@ -40,3 +42,11 @@ gulp.task('watch', function () {
     // gulp.watch('less/*.less', ['styles']);
     // gulp.watch('templates/**/*.{swig,json}', ['html']);
 });
+
+function swallowError (error) {
+
+  // If you want details of the error in the console
+  console.log(error.toString());
+
+  this.emit('end');
+}

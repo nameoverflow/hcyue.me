@@ -8,7 +8,7 @@ module.exports = (conn, params) ->
             console.log 'accepted', doc
             if err
                 console.log err
-                return conn.send 'err', {
+                return conn.die {
                     err: 500
                     message: err
                 }

@@ -23,7 +23,7 @@ article
     padding-right: $article_margin
 
 .SingleArticle
-    padding-top: 34px
+    padding: 34px 10%
 
 
 .title-list, .title-single
@@ -36,7 +36,7 @@ article
 .title-list
     padding-bottom: 5px
     padding-top: 5px
-.title-list, .article-meta
+.title-list, .ArticleMeta
     a
         text-decoration: none
         color: inherit
@@ -56,17 +56,21 @@ article
         font-size: 2em
         text-align: right
 
-.article-meta
+.ArticleMeta
     font-size: 0.8rem
     color: #bbb
+    &:hover
+        color: #333
     p
         margin-bottom: 5px
-.ArticleList .article-meta
+    .meta-text
+        color: #333
+.ArticleList .ArticleMeta
     padding-bottom: 0.5em
     i
         margin-right: 0.3em
 
-.SingleArticle .article-meta
+.SingleArticle .ArticleMeta
     text-align: right
     p
         margin-right: 3em
