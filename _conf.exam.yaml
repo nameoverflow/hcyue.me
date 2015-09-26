@@ -1,0 +1,7 @@
+site:
+    admin:
+        name: fucker
+        passwd: 123
+    view: './view'
+    db:
+        url: mongodb://localhost/blog

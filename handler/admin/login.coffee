@@ -1,8 +1,5 @@
 render = require '../../model/render'
-acc = {
-    name: 'fucker'
-    passwd: '123'
-}
+acc = (yaml.safeLoad fs.readFileSync '../../config.yml', 'utf8').site.admin
 module.exports = (conn, params) ->
     conn.session (session) ->
         if (session.get 'auth') is 'admin'

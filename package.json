@@ -17,6 +17,7 @@
     "marked": "^0.3.5",
     "mongoose": "*",
     "vinyl-source-stream": "*",
+    "js-yaml": "*",
     "yue": "*"
   }
 }

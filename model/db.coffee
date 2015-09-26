@@ -1,6 +1,6 @@
 mong = require 'mongoose'
 
-db_uri = 'mongodb://localhost/blog'
+conf = (yaml.safeLoad fs.readFileSync '../../config.yml', 'utf8').site.db
 
 db = mong.connection
 
@@ -20,7 +20,7 @@ process.on 'SIGINT', () ->
         console.log 'Mongoose disconnected through app termination'
         process.exit(0)
 
-mong.connect db_uri
+mong.connect conf.url
 
 Schema = mong.Schema
 

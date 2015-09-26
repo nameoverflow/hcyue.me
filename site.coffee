@@ -1,3 +1,5 @@
+yaml = require 'js-yaml'
+
 ###
 Import the core file
 ###
