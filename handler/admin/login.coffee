@@ -1,3 +1,4 @@
+yaml = require 'js-yaml'
 render = require '../../model/render'
 acc = (yaml.safeLoad fs.readFileSync '../../config.yml', 'utf8').site.admin
 module.exports = (conn, params) ->

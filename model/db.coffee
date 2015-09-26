@@ -1,4 +1,5 @@
 mong = require 'mongoose'
+yaml = require 'js-yaml'
 
 conf = (yaml.safeLoad fs.readFileSync '../../config.yml', 'utf8').site.db
 
