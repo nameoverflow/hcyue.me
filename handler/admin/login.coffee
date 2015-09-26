@@ -1,7 +1,7 @@
 yaml = require 'js-yaml'
 render = require '../../model/render'
 fs = require 'fs'
-acc = (yaml.safeLoad fs.readFileSync '../../config.yml', 'utf8').site.admin
+acc = (yaml.safeLoad fs.readFileSync './config.yml', 'utf8').site.admin
 module.exports = (conn, params) ->
     conn.session (session) ->
         if (session.get 'auth') is 'admin'
