@@ -29,7 +29,9 @@ var SingleArticle = React.createClass({
             this.setState({
                 mh: h + 20 + 'px'
             })
-        }).catch(data => {
+        }).then(() =>
+            hljs && Array.prototype.forEach.call(document.querySelectorAll('pre code:not(.hljs)'), hljs.highlightBlock)
+        ).catch(data => {
             console.log(data);
         });
     },

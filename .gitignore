@@ -9,4 +9,4 @@ view.ai
 **/sassCore/
 tmp/
 code/yue-blog/src/style/typo.css
-_conf.yaml
+config.yml

@@ -49,7 +49,9 @@ var Index = React.createClass({
             return this.setState({
                 archives: this.state.archives.concat({body: data.message})
             });
-        }).catch(data => {
+        }).then(() =>
+            hljs && Array.prototype.forEach.call(document.querySelectorAll('pre code:not(.hljs)'), hljs.highlightBlock)
+        ).catch(data => {
             console.log(data);
         });
     },

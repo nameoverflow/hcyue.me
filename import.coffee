@@ -82,9 +82,7 @@ for i in files
         'tags': info['tags'] || []
         'break': if (body.split '<!--more-->')[1] then true else false
 
-    console.log info['date'].getTime()
-    # Post.create post_data, (err, doc) =>
-    #     console.log "#{info['title']} finished"
-    #     console.log "#{doc}"
+    Post.create post_data, (err, doc) =>
+        console.log "#{info['title']} finished"
 
 mong.disconnect()
