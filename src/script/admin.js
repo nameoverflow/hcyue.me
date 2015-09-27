@@ -1,12 +1,16 @@
 import {ajax, getEleTop} from './utils';
 window.loader = (function () {
 
-    let getList = function (elem, start, limit) {
-        ajax.get('/api/article', {
+    let getList = function (type, elem, start, limit) {
+        let query =  {
             'start': start,
             'limit': limit,
             'type': 'title'
-        }).then(data => {
+        };
+        if (type === 'page') {
+            query['page'] = true;
+        }
+        ajax.get('/api/article', query).then(data => {
             let list_str = ``;
 
             for (let i = 0; i < data.length; i++) {
@@ -31,15 +35,9 @@ window.loader = (function () {
     };
     return (function (get, elem, limit) {
         let num = 0;
-        return () => {
-            get(elem, num, limit);
+        return (type='article') => {
+            get(type, elem, num, limit);
             num += limit;
         }
     })(getList, document.getElementById('article-list'), 30);
-})();
-
-window.commit = (function () {
-    return (elem) => {
-        //ajax.
-    }
 })();

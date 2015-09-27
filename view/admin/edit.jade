@@ -12,14 +12,25 @@ html(lang="zh-cn")
                         h3 Edit
                     .card-body
                         p= message
-                        form(action="/api/article?post=" + post, method="post")
-                            div#edit-area
-                                input#title(type="text", placeholder="Title", name="title", value=title)
-                                input#tags(type="text", placeholder="Tags using ; to split", name="tags", value=tags)
-                                div#content
-                                    pre#content-p
-                                    textarea#content-a(name="body")= content
-                            input.button.button-pill.button-border.button-large#sub(type="submit", value="Submit")
+                        if !page
+                            form(action="/api/article?post=" + post, method="post")
+                                div#edit-area
+                                    input#title(type="text", placeholder="Title", name="title", value=title)
+                                    input#tags(type="text", placeholder="Tags using ; to split", name="tags", value=tags)
+                                    div#content
+                                        pre#content-p
+                                        textarea#content-a(name="body")= content
+                                input.button.button-pill.button-border.button-large#sub(type="submit", value="Submit")
+                        else
+                            form(action="/api/article?page=ture&post=" + post, method="post")
+                                div#edit-area
+                                    input#title(type="text", placeholder="Title", name="title", value=title)
+                                    input#tags(type="text", placeholder="Tags using ; to split", name="tags", value=tags)
+                                    div#content
+                                        pre#content-p
+                                        textarea#content-a(name="body")= content
+                                input.button.button-pill.button-border.button-large#sub(type="submit", value="Submit")
+
         script.
             var fuck = function () {
                 el = document.getElementById('content-p');

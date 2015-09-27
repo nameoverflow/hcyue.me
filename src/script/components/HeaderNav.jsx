@@ -5,7 +5,7 @@ var menu = ['home', 'archives', 'lab', 'about'];
 var NavBtn =  React.createClass({
     render() {
         return (
-            <Link to={this.props.name} className="NavBtn">
+            <Link to={`/${this.props.name == 'home' ? '' : this.props.name}`} className="NavBtn">
                 <div>
                     <img src={"/static/img/" + this.props.name + ".svg"} type="image/svg+xml"/>
                 </div>

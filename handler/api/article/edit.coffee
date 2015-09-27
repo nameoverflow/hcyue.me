@@ -28,6 +28,7 @@ module.exports = (conn, params) ->
             if conn.body['tags'] then post_data['tags'] = conn.body['tags'].split(';')
 
             if !conn.query || (conn.query['post'] is 'new')
+                conn.query && conn.query['page'] && post_data['type'] = 'page'
                 db.add 'Post', post_data, dbCb
             else
                 post_id = conn.query['post']

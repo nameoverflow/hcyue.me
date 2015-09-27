@@ -20,9 +20,11 @@ module.exports = (conn, params) ->
         else
             # content =
             #     post: params['post']
-
             if params['post'] is 'new'
-                conn.send 'html', render './view/admin/edit.jade', getTmpData params['post']
+                tmp = getTmpData params['post']
+                if conn.query && conn.query['page']
+                    tmp['page'] = true
+                conn.send 'html', render './view/admin/edit.jade', tmp
             else
                 db.findById 'Post', params['post'], (err, row) ->
                     if err

@@ -13,15 +13,33 @@ html(lang="zh-cn")
                     .card-body
                         p= message
                         .cat-g
-                            .col-1-2
+                            .col-1-3
                                 a.button.button-pill.button-border.button-large.no-ani(href="/admin/logout") Logout
-                            .col-1-2
-                                a.button.button-pill.button-border.button-large.no-ani(href="/admin/edit/new") New Post
-                        
+                            if !page
+                                .col-1-3
+                                    a.button.button-pill.button-border.button-large.no-ani(href="/admin/edit/new") New Post
+                                .col-1-3
+                                    a.button.button-pill.button-border.button-large.no-ani(href="/admin?pages=true") Manage Pages
+                            else
+                                .col-1-3
+                                    a.button.button-pill.button-border.button-large.no-ani(href="/admin/edit/new?page=true") New Page
+                                .col-1-3
+                                    a.button.button-pill.button-border.button-large.no-ani(href="/admin") Manage Posts
                         div
                             ul#article-list
                             .button.button-pill.button-border.button-large#more Load More
         script(src="/static/script/admin.js")
-        script.
-            document.getElementById('more').addEventListener('click', loader, false);
-            loader();
+        if page
+            script.
+                fucker = function () {
+                    loader('page');
+                };
+                document.getElementById('more').addEventListener('click', fucker, false);
+                fucker();
+        else
+            script.
+                fucker = function () {
+                    loader('article');
+                };
+                document.getElementById('more').addEventListener('click', fucker, false);
+                fucker();

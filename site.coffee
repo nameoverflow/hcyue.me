@@ -11,19 +11,11 @@ Create app object
 app = new yue.app()
 
 ###
-Static file server
-###
-staticFile = require 'yue/static'
-app.route '/static/*', staticFile 'public'
-
-app.route '/favicon.ico', (conn, params) ->
-    conn.send 'jump', '/static/favicon.ico'
-###
 Main page
 ###
 index = require './handler/main'
-app.route ['/', '/archives', '/lab', '/about', '/article/*'], index
-
+# app.route ['/', '/archives', '/lab', '/about', '/article/*'], index
+app.route ['/', '/*'], index
 
 ###
 APIs
@@ -52,3 +44,12 @@ app.route '/admin/logout', admin_logout
 
 admin_edit = require './handler/admin/edit'
 app.route '/admin/edit/{post}', admin_edit
+
+###
+Static file server
+###
+staticFile = require 'yue/static'
+app.route '/static/*', staticFile 'public'
+
+app.route '/favicon.ico', (conn, params) ->
+    conn.send 'jump', '/static/favicon.ico'

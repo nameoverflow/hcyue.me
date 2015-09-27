@@ -5,7 +5,7 @@ var source = require('vinyl-source-stream');
 var sass = require('gulp-sass');
 
 
-gulp.task('compile', function() {
+gulp.task('c', function() {
     browserify({
         entries: './src/script/main.jsx',
         debug: true,
@@ -29,15 +29,15 @@ gulp.task('compile', function() {
     .pipe(gulp.dest('./public/script'));
     console.log("admin.js Completed");
 });
-gulp.task('build', function() {
+gulp.task('b', function() {
     gulp.src('src/style/*.sass')
     .pipe(sass().on('error', sass.logError))
     .pipe(gulp.dest('./public/style/'));
 });
 
 gulp.task('watch', function () {
-    gulp.watch(['src/script/**.js', 'src/script/**.jsx', 'src/script/**/*.js', 'src/script/**/*.jsx'], ['compile']);
-    gulp.watch(['src/style/**.sass', 'src/style/**.scss', 'src/style/**.css', 'src/style/**/*.sass', 'src/style/**/*.scss', 'src/style/**/*.css'], ['build']);
+    gulp.watch(['src/script/**.js', 'src/script/**.jsx', 'src/script/**/*.js', 'src/script/**/*.jsx'], ['c']);
+    gulp.watch(['src/style/**.sass', 'src/style/**.scss', 'src/style/**.css', 'src/style/**/*.sass', 'src/style/**/*.scss', 'src/style/**/*.css'], ['b']);
     // gulp.watch('img/**/*.{jpg,jpeg,png,gif}', ['copy:images']);
     // gulp.watch('less/*.less', ['styles']);
     // gulp.watch('templates/**/*.{swig,json}', ['html']);

@@ -4,6 +4,9 @@ render = require '../../model/render'
 module.exports = (conn, params) ->
     conn.session (session) ->
         if (session.get 'auth') isnt 'admin'
-            conn.send 'jump', '/admin/login'
-        else
-            conn.send 'html', render './view/admin/index.jade'
+            return conn.send 'jump', '/admin/login'
+        fuck =
+            page: false
+        if conn.query && conn.query['pages']
+            fuck.page = true
+        conn.send 'html', render './view/admin/index.jade', fuck
