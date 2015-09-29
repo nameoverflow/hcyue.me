@@ -4,14 +4,25 @@
     transition-delay: 0s
     overflow: hidden
     > header
+        position: relative
         padding: 3% 5%
+        cursor: pointer
     article
         padding: 0
         margin: 0 10%
-        border-bottom: 1px dashed #ccc
         @include clearfix()
+
     .ArticleMeta
         float: right
         padding: 0.7rem 0 0
     .title-list
         float: left
+    .mark
+        position: absolute
+        left: 2.3rem
+    .ArticleList
+        > li:not(:nth-last-child(2))
+            > article
+                border-bottom: 1px dashed #ccc
+
+    

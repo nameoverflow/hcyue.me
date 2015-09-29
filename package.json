@@ -13,11 +13,13 @@
     "browserify": "*",
     "gulp": "*",
     "gulp-sass": "*",
+    "gulp-streamify": "^1.0.2",
+    "gulp-uglify": "^1.4.1",
     "jade": "^1.11.0",
+    "js-yaml": "*",
     "marked": "^0.3.5",
     "mongoose": "*",
     "vinyl-source-stream": "*",
-    "js-yaml": "*",
     "yue": "*"
   }
 }

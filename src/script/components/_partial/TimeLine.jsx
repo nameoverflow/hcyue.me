@@ -37,6 +37,7 @@ var TimeLine = React.createClass({
         return (
             <section className="TimeLine">
                 <header onClick={this.handleClick}>
+                    <span className="mark">{this.state.toggle === 'none' ? '+' : '-'}</span>
                     <h2>
                         {this.props.time}
                     </h2>
@@ -47,7 +48,11 @@ var TimeLine = React.createClass({
                     <ArticleList display='title'>
                         {this.state.data}
                     </ArticleList>
-                ) : 'Loading...'
+                ) : (
+                    <article id="end-list">
+                        Loading....
+                    </article>
+                )
             }
                 </main>
             </section>

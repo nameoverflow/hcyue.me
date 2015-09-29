@@ -5,6 +5,7 @@ import {ajax, getEleTop, parseTime, getArticles, getScrollHeight} from '../utils
 // import ArticleText from './ArticleText';
 import ArticleList from './_partial/ArticleList'
 
+let load_state = 0;
 var Index = React.createClass({
     getInitialState() {
         return {
@@ -16,7 +17,7 @@ var Index = React.createClass({
     componentDidMount() {
         this.load('summary');
         window.addEventListener('scroll', this.handleScroll);
-        // console.log(window.innerHeight, getScrollHeight());
+
     },
     componentWillUnmount() {
         window.removeEventListener('scroll', this.handleScroll);
@@ -25,12 +26,10 @@ var Index = React.createClass({
         let cur_scroll = document.body.scrollTop || document.documentElement.scrollTop,
             height = getScrollHeight(),
             active_height = window.innerHeight * 1.2;
-        // console.log(height - cur_scroll, win_height + 100);
-        if (height - cur_scroll < active_height) {
+
+        if (height - cur_scroll < active_height && !load_state && !this.state.end) {
+            load_state = 1;
             this.load('summary', this.state.loaded);
-        }
-        if (this.state.end) {
-            window.removeEventListener('scroll', this.handleScroll);
         }
     },
     load(type, start=0, limit=10) {
@@ -38,13 +37,14 @@ var Index = React.createClass({
             let end = false;
             if (!data[0]) {
                 end = true;
-                data = []
+                window.removeEventListener('scroll', this.handleScroll);
             }
             this.setState({
                 archives: this.state.archives.concat(data),
                 loaded: this.state.loaded + data.length,
                 end: end
             });
+            load_state = 0;
         }, (data) => {
             return this.setState({
                 archives: this.state.archives.concat({body: data.message})
@@ -61,7 +61,7 @@ var Index = React.createClass({
                 <ArticleList>
                     {this.state.archives}
                 </ArticleList>
-                <article id="end-list" style={{'display': this.state.end ? 'block' : 'none'}}>
+                <article id="end-list">
                     {this.state.end ? 'The End' : 'Loading....'}
                 </article>
             </div>

@@ -3,31 +3,24 @@ var browserify = require('browserify');
 var babelify = require('babelify');
 var source = require('vinyl-source-stream');
 var sass = require('gulp-sass');
+var uglify = require('gulp-uglify');
+var streamify = require('gulp-streamify');
 
+function compile(src, out) {
+    return browserify({
+        entries: './src/script/' + src,
+        debug: true,
+        extensions: ['.js', '.jsx']
+    })
+    .transform(babelify)
+    .bundle()
+    .on('error', swallowError)
+    .pipe(source(out))
+}
 
 gulp.task('c', function() {
-    browserify({
-        entries: './src/script/main.jsx',
-        debug: true,
-        extensions: ['.js', '.jsx']
-    })
-    .transform(babelify)
-    .bundle()
-    .on('error', swallowError)
-    .pipe(source('main.js'))
-    .pipe(gulp.dest('./public/script'));
-    console.log("main.js Completed");
-    browserify({
-        entries: './src/script/admin.js',
-        debug: true,
-        extensions: ['.js', '.jsx']
-    })
-    .transform(babelify)
-    .bundle()
-    .on('error', swallowError)
-    .pipe(source('admin.js'))
-    .pipe(gulp.dest('./public/script'));
-    console.log("admin.js Completed");
+    compile('main.jsx', 'main.js').pipe(streamify(uglify())).pipe(gulp.dest('./public/script'));
+    compile('admin.js', 'admin.js').pipe(streamify(uglify())).pipe(gulp.dest('./public/script'));
 });
 gulp.task('b', function() {
     gulp.src('src/style/*.sass')
@@ -35,7 +28,7 @@ gulp.task('b', function() {
     .pipe(gulp.dest('./public/style/'));
 });
 
-gulp.task('watch', function () {
+gulp.task('w', function () {
     gulp.watch(['src/script/**.js', 'src/script/**.jsx', 'src/script/**/*.js', 'src/script/**/*.jsx'], ['c']);
     gulp.watch(['src/style/**.sass', 'src/style/**.scss', 'src/style/**.css', 'src/style/**/*.sass', 'src/style/**/*.scss', 'src/style/**/*.css'], ['b']);
     // gulp.watch('img/**/*.{jpg,jpeg,png,gif}', ['copy:images']);

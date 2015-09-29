@@ -19,7 +19,7 @@ var HeaderNav = React.createClass({
         return (
             <header id="HeaderNav">
                 <div className="banner">
-                    <img />
+                    <img src="/static/img/head.png"/>
                 </div>
                 <ul>
             {
