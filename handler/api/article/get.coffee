@@ -34,9 +34,9 @@ module.exports = (conn, params) ->
     if not query_data['createDate']
         cur.limit(limit)
     cur.exec (err, row) =>
-            if err
-                conn.die {
-                    err: 500
-                    message: err
-                }
-            conn.send 'json', row
+        if err
+            return conn.die {
+                err: 500
+                message: err
+            }
+        conn.send 'json', row

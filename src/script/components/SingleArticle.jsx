@@ -4,6 +4,7 @@ import {ajax, parseTime} from '../utils';
 import ArticleTitle from './_partial/ArticleTitle';
 import ArticleText from './_partial/ArticleText';
 import ArticleMeta from './_partial/ArticleMeta';
+import Comment from './_partial/Comment';
 
 var SingleArticle = React.createClass({
     getInitialState() {
@@ -44,6 +45,9 @@ var SingleArticle = React.createClass({
                     </ArticleTitle>
                     <ArticleText>{this.state.body}</ArticleText>
                     <ArticleMeta time={this.state.createDate} tags={this.state.tags} />
+                </article>
+                <article>
+                    <Comment thread={window.location.pathname} url={window.location.toString()}/>
                 </article>
             </div>
         );
