@@ -10,3 +10,4 @@ view.ai
 tmp/
 code/yue-blog/src/style/typo.css
 config.yml
+npm-debug.log
