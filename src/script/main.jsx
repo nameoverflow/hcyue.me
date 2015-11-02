@@ -2,6 +2,7 @@
 // import Router from 'react-router'
 
 import HeaderNav from './components/HeaderNav';
+import HeaderMobile from './components/HeaderMobile';
 import SingleArticle from './components/SingleArticle';
 import Index from './components/Index';
 import Archives from './components/Archives';
@@ -16,6 +17,7 @@ var Main = React.createClass({
         return (
             <div id='container'>
                 <HeaderNav/>
+                <HeaderMobile/>
                 <main id='page-main'>
                     <RouteHandler/>
                 </main>

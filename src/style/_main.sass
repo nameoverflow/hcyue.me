@@ -39,4 +39,14 @@ pre > code.hljs
     font-size: 13px
 
 #page-main
-    margin-left: calc(100vw - 100%);
+    margin-left: calc(100vw - 100%)
+
+@media #{$mid_scr}
+    html, body
+        font-size: 14px
+    #HeaderNav
+        display: none
+    #HeaderMobile
+        display: block !important
+    main#page-main
+        left: 0
