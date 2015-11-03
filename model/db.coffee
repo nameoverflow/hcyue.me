@@ -30,43 +30,54 @@ postSchema = new Schema {
     summary: String
     body: String
     bodySource: String
-    createDate: {
+    createDate:
         type: Number
         default: Date.now
-    }
-    editDate: {
+    editDate:
         type: Number
         default: Date.now
-    }
-    tags: {
+    tags:
         type: [String]
         default: []
-    }
     ###
     type: 'article'|'page'
     ###
-    type:  {
+    type:
         type: String
         default: 'article'
-    }
-    break: {
+    break:
         type: Boolean
         default: false
-    }
+}
+tagSchema = new Schema {
+    name: String
+    contain: [String]
 }
 mong.model 'Post', postSchema
+mong.model 'Tag', tagSchema
 
-module.exports.findById = (model_name, id, callback) ->
-    (mong.model model_name).findOne {_id: id}, callback
-
-module.exports.add = (model_name, data, callback) ->
-    (mong.model model_name).create data, callback
-
-module.exports.find = (model_name, condi, callback) ->
-    (mong.model model_name).find condi
-
-module.exports.update = (model_name, condi, data, callback) ->
-    (mong.model model_name).update condi, data, callback
-
-module.exports.rm = (model_name, condi, callback) ->
-    (mong.model model_name).remove condi, callback
+module.exports =
+    findById: (model_name, id, callback) ->
+        (mong.model model_name).findOne {_id: id}, callback
+    add: (model_name, data, callback) ->
+        (mong.model model_name).create data, callback
+    find: (model_name, condi, callback) ->
+        (mong.model model_name).find condi
+    update: (model_name, condi, data, callback) ->
+        (mong.model model_name).update condi, data, callback
+    del: (model_name, condi, callback) ->
+        (mong.model model_name).remove condi, callback
+# module.exports.findById = (model_name, id, callback) ->
+#     (mong.model model_name).findOne {_id: id}, callback
+#
+# module.exports.add = (model_name, data, callback) ->
+#     (mong.model model_name).create data, callback
+#
+# module.exports.find = (model_name, condi, callback) ->
+#     (mong.model model_name).find condi
+#
+# module.exports.update = (model_name, condi, data, callback) ->
+#     (mong.model model_name).update condi, data, callback
+#
+# module.exports.rm = (model_name, condi, callback) ->
+#     (mong.model model_name).remove condi, callback

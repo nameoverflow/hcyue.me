@@ -1,14 +1,19 @@
 import {ajax} from '../utils'
 import TimeLine from './_partial/TimeLine'
+import Wrapper from './_partial/Wrapper'
 
 var Archives = React.createClass({
     getInitialState() {
         return {
-            years: []
+            years: [],
+            show: false
         };
     },
     componentDidMount() {
-        this.loadTimeLine();
+        this.loadTimeLine()
+        .then(() =>
+            this.setState({show: true})
+        );
     },
     loadTimeLine() {
         return ajax.get('/api/time').then(data =>
@@ -22,13 +27,13 @@ var Archives = React.createClass({
     },
     render() {
         return (
-            <div id="wrapper">
+            <Wrapper show={this.state.show}>
         {
             this.state.years.map(year =>
                 <TimeLine time={year} />
             )
         }
-            </div>
+            </Wrapper>
         )
     }
 });

@@ -5,15 +5,17 @@ import ArticleTitle from './_partial/ArticleTitle';
 import ArticleText from './_partial/ArticleText';
 import ArticleMeta from './_partial/ArticleMeta';
 import Comment from './_partial/Comment';
+import Wrapper from './_partial/Wrapper'
 
-var SingleArticle = React.createClass({
-    getInitialState() {
-        return {
+export default class SingleArticle extends React.Component {
+    constructor() {
+        super();
+        this.state = {
+            show: false,
             body: '<p>loading...</p>'
         };
-    },
-
-    componentWillMount() {
+    }
+    componentDidMount() {
         ajax.get('/api/article', {
             'id': this.props.params.id
         }).then(data => {
@@ -34,11 +36,13 @@ var SingleArticle = React.createClass({
             hljs && Array.prototype.forEach.call(document.querySelectorAll('pre code:not(.hljs)'), hljs.highlightBlock)
         ).catch(data => {
             console.log(data);
-        });
-    },
+        }).then(() =>
+            this.setState({show: true})
+        );
+    }
     render() {
         return (
-            <div id="wrapper">
+            <Wrapper show={this.state.show}>
                 <article className="SingleArticle typo" style={{'minHeight': this.state.mh}}>
                     <ArticleTitle className="title-single">
                         {this.state.title || ''}
@@ -49,9 +53,7 @@ var SingleArticle = React.createClass({
                 <article>
                     <Comment thread={window.location.pathname} url={window.location.toString()}/>
                 </article>
-            </div>
+            </Wrapper>
         );
     }
-});
-
-export default SingleArticle;
+}

@@ -4,6 +4,7 @@ import {ajax, getEleTop, parseTime, getArticles, getScrollHeight} from '../utils
 // import ArticleTitle from './ArticleTitle';
 // import ArticleText from './ArticleText';
 import ArticleList from './_partial/ArticleList'
+import Wrapper from './_partial/Wrapper'
 
 let load_state = 0;
 var Index = React.createClass({
@@ -11,11 +12,15 @@ var Index = React.createClass({
         return {
             archives: [],
             loaded: 0,
+            show: false,
             end: false
         };
     },
     componentDidMount() {
-        this.load('summary');
+        this.load('summary')
+        .then(() =>
+            this.setState({show: true})
+        );
         window.addEventListener('scroll', this.handleScroll);
 
     },
@@ -57,14 +62,14 @@ var Index = React.createClass({
     },
     render() {
         return (
-            <div id="wrapper">
+            <Wrapper show={this.state.show}>
                 <ArticleList>
                     {this.state.archives}
                 </ArticleList>
                 <article id="end-list">
                     {this.state.end ? 'The End' : 'Loading....'}
                 </article>
-            </div>
+            </Wrapper>
         );
     }
 });

@@ -1,5 +1,7 @@
-
-let ArticleTitle = React.createClass({
+export default class ArticleTitle extends React.Component {
+    constructor() {
+        super();
+    }
     render() {
         return (
             <div className={this.props.className}>
@@ -13,6 +15,4 @@ let ArticleTitle = React.createClass({
             </div>
         );
     }
-});
-
-export default ArticleTitle;
+}

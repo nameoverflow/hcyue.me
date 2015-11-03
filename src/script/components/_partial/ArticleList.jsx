@@ -2,9 +2,11 @@ import ArticleTitle from './ArticleTitle';
 import ArticleText from './ArticleText';
 import ArticleMeta from './ArticleMeta';
 import {parseTime} from '../../utils'
-var Link = ReactRouter.Link
-
-var ArticleList = React.createClass({
+const Link = ReactRouter.Link
+export default class ArticleList extends React.Component {
+    constructor() {
+        super();
+    }
     render() {
         return (
                 <ul className="ArticleList">
@@ -45,6 +47,4 @@ var ArticleList = React.createClass({
 
         );
     }
-});
-
-export default ArticleList;
+}
