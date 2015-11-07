@@ -7,10 +7,10 @@ export default class Wrapper extends React.Component {
         return (
             <div id="wrapper" style={
                 this.props.show ? {
-                    left: '0',
+                    transform: 'translateX(0)',
                     opacity: '1'
                 } : {
-                    left: '100px',
+                    transform: 'translateX(100px)',
                     opacity: '0'
                 }
             }>

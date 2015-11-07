@@ -1,21 +1,20 @@
 // import React from 'react';
 import {ajax, getEleTop, parseTime, getArticles, getScrollHeight} from '../utils';
 
-// import ArticleTitle from './ArticleTitle';
-// import ArticleText from './ArticleText';
 import ArticleList from './_partial/ArticleList'
 import Wrapper from './_partial/Wrapper'
 
 let load_state = 0;
-var Index = React.createClass({
-    getInitialState() {
-        return {
+export default class Index extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
             archives: [],
             loaded: 0,
             show: false,
             end: false
         };
-    },
+    }
     componentDidMount() {
         this.load('summary')
         .then(() =>
@@ -23,10 +22,10 @@ var Index = React.createClass({
         );
         window.addEventListener('scroll', this.handleScroll);
 
-    },
+    }
     componentWillUnmount() {
         window.removeEventListener('scroll', this.handleScroll);
-    },
+    }
     handleScroll() {
         let cur_scroll = document.body.scrollTop || document.documentElement.scrollTop,
             height = getScrollHeight(),
@@ -36,7 +35,7 @@ var Index = React.createClass({
             load_state = 1;
             this.load('summary', this.state.loaded);
         }
-    },
+    }
     load(type, start=0, limit=10) {
         return getArticles(type, start, limit).then(data => {
             let end = false;
@@ -59,7 +58,7 @@ var Index = React.createClass({
         ).catch(data => {
             console.log(data);
         });
-    },
+    }
     render() {
         return (
             <Wrapper show={this.state.show}>
@@ -72,6 +71,6 @@ var Index = React.createClass({
             </Wrapper>
         );
     }
-});
+}
 
 export default Index;
