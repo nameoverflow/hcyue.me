@@ -41,8 +41,6 @@ export default class ArticleList extends React.Component {
                     </li>
                 )
             }
-                    <footer>
-                    </footer>
                 </ul>
 
         );

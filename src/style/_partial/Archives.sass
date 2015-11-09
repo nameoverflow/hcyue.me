@@ -17,12 +17,14 @@
         padding: 0.7rem 0 0
     .title-list
         float: left
+        text-align: left
         @media #{$mid_scr}
             float: none
     .mark
         position: absolute
         left: 2.5%
     .ArticleList
-        > li:not(:nth-last-child(2))
+        > li
             > article
-                border-bottom: 1px dashed #ccc
+                &::after
+                    margin: 0.3rem 1rem

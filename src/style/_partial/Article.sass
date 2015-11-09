@@ -2,14 +2,21 @@ $nav_width: 300px
 $main_inside: 20px
 $article_margin: 10%
 
+
 .ArticleList
     padding: 0
     margin: 0
     > li
         list-style: none
     article
-        padding-top: 2rem
-        padding-bottom: 3rem
+        &::after
+            display: block
+            content: ""
+            width: auto
+            height: 1px
+            //background-color: #ccc
+            border-bottom: 1px #ccc dashed
+            margin: 6rem 350px
 #end-list
     text-align: center
     color: #999
@@ -34,9 +41,9 @@ article
 
 
 .title-list
-    padding-bottom: 5px
-    padding-top: 5px
+    padding: 1rem 0
 .title-list, .ArticleMeta
+    text-align: center
     a
         text-decoration: none
         color: inherit
@@ -59,6 +66,7 @@ article
 .ArticleMeta
     font-size: 0.8rem
     color: #bbb
+    margin-bottom: 1rem
     &:hover
         color: #333
     p
