@@ -35,8 +35,8 @@ export var ajax = {
 };
 
 export var getEleTop = function (elem) {
-    let actualTop = element.offsetTop;
-    let current = element.offsetParent;
+    let actualTop = elem.offsetTop;
+    let current = elem.offsetParent;
     while (current !== null){
         actualTop += current.offsetTop;
         current = current.offsetParent;
@@ -68,7 +68,7 @@ export var verticalTitle = (elem) => {
     elem.innerHTML = str;
 }
 
-export var getArticles = function (type, start=0, limit=10) {
+export const getArticles = (type, start=0, limit=10) => {
     return ajax.get('/api/article', {
         'start': start,
         'limit': limit,
