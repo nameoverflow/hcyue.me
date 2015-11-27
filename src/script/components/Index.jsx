@@ -59,7 +59,10 @@ export default class Index extends React.Component {
                 archives: this.state.archives.concat({body: data.message})
             });
         }).then(() =>
-            hljs && Array.prototype.forEach.call(document.querySelectorAll('pre code:not(.hljs)'), hljs.highlightBlock)
+            hljs && [].forEach.call(
+                document.querySelectorAll('pre code:not(.hljs)'),
+                hljs.highlightBlock
+            )
         ).catch(data => {
             console.log(data);
         });

@@ -99,7 +99,8 @@ export var heightTrans = function(elem, time) { // time, 数值，可缺省
     let targetHeight = window.getComputedStyle(elem).height;
     elem.style.height = height;
     setTimeout(() => {
-        if (time) elem.style.transition = "height "+ time +"ms ease-in-out";
+        if (time)
+             elem.style.transition = "height "+ time +"ms ease-in-out";
         elem.style.height = targetHeight;
     }, 5);
 };

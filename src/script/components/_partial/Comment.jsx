@@ -4,10 +4,10 @@ export default class Comment extends React.Component {
     }
     componentDidMount() {
         try {
-            DUOSHUO.EmbedThread(React.findDOMNode(this));
+            DUOSHUO.EmbedThread(".DuoShuoComment");
         } catch (e) {
             console.log(e);
-            DUOSHUO.EmbedThread(React.findDOMNode(this));
+            DUOSHUO.EmbedThread(".DuoShuoComment");
         }
     }
     render() {
@@ -15,6 +15,7 @@ export default class Comment extends React.Component {
             <div
                 data-thread-key={this.props.thread}
                 data-url={this.props.url}
+                className="DuoShuoComment"
             />
         );
     }

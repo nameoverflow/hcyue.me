@@ -4,6 +4,7 @@ build/*
 public/*
 view.ai
 .sass-cache/*
+*.cache
 *.swp
 .idea/
 **/sassCore/
