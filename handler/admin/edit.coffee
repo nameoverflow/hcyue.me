@@ -25,7 +25,7 @@ module.exports = (conn, params) ->
         else
             db.findById 'Post', params['post'], (err, row) ->
                 if err
-                    conn.die,
+                    conn.die
                         err: 500
                         message: err
 
