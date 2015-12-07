@@ -1,6 +1,7 @@
+import React from 'react'
 export default class ArticleTitle extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
     }
     render() {
         return (

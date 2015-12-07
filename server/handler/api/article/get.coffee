@@ -1,42 +1,33 @@
-db = require '../../../model/db.coffee'
-
+db = require '../../../model/db/post'
+article = db.article
 module.exports = (conn, params) ->
-    query_data =
-        type: 'article'
-    if conn.query
-        if id = conn.query['id']
-            return db.findById 'Post', id, (err, row) =>
-                if err
-                    conn.die {
-                        err: 500
-                        message: err
-                    }
-                conn.send 'json', row
-        start = +conn.query['start'] || 0
-        limit = +conn.query['limit'] || 1
-        type = conn.query['type'] || 'all'
-        # summary | title | all
-        if conn.query['page']
-            query_data['type'] = 'page'
-            conn.query['title'] && query_data['title'] = conn.query['title']
-        if conn.query['st'] or conn.query['et']
-            query_data['createDate'] = {}
-        if conn.query['st']
-            query_data['createDate']['$gte'] = +conn.query['st']
-        if conn.query['et']
-            query_data['createDate']['$lte'] = +conn.query['et']
-    # console.log query_data
-    cur = db.find 'Post', query_data
-    cnt_str = if type is 'summary' then 'summary break' else if type is 'all' then 'body editDate' else ''
-    cur.sort({createDate: -1})
-        .select("_id title tags createDate #{cnt_str}")
-        .skip(start)
-    if not query_data['createDate']
-        cur.limit(limit)
-    cur.exec (err, row) =>
+    _sendData = (err, row) =>
         if err
-            return conn.die {
+            conn.die {
                 err: 500
                 message: err
             }
-        conn.send 'json', row
+        else
+            # console.log row
+            conn.send 'json', row
+
+    if not conn.query
+        article.getSummary 0, 5, _sendData
+    else
+        if id = conn.query['id']
+            db.singleById id, _sendData
+        else if title = conn.query['title']
+            db.singleByTitle title, _sendData
+        else
+            if (s_t = conn.query['st']) and (e_t = conn.query['et'])
+                article.timeLine s_t, e_t, _sendData
+            else
+                start = +conn.query['start'] || 0
+                limit = +conn.query['limit'] || 5
+                if conn.query['page']
+                    db.pageList start, limit, _sendData
+                else
+                    type = conn.query['type'] || 'summary'
+                    console.log type
+                    article[type] start, limit, _sendData
+                    # summary | title | all

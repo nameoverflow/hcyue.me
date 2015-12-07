@@ -1,21 +1,12 @@
-db = require '../../../model/db'
-render = require '../../../model/render'
+marked = require 'marked'
+
+db = require '../../../model/db/model'
+auth = require '../../../model/auth'
+dbCb = require './handlePost'
 
 module.exports = (conn, params) ->
-    dbCb = (err, doc) =>
-        console.log 'accepted', doc
-        if err
-            console.log err
-            return conn.send 'err', {
-                err: 500
-                message: err
-            }
-        return conn.send 'jump', '/admin'
-
-    conn.session (session) ->
-        if (session.get 'auth') isnt 'admin'
-            conn.send 'jump', '/admin/login'
-        else if not (conn.query || conn.query['id'])
+    auth conn, () =>
+        if not (conn.query || conn.query['id'])
             conn.send 'err', {
                 err: 403
             }

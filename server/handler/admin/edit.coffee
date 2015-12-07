@@ -1,4 +1,4 @@
-db = require '../../model/db'
+db = require '../../model/db/model'
 render = require '../../model/render'
 auth = require '../../model/auth'
 
@@ -14,6 +14,7 @@ getTmpData = (id, row) ->
         tags: row['tags'].join(';')
 
 module.exports = (conn, params) ->
+    render conn
     auth conn, () =>
         # content =
         #     post: params['post']

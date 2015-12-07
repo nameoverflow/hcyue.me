@@ -7,7 +7,7 @@ site:
         url: mongodb://localhost/blog
 
 view:
-    path: './server/templates'
+    path: './server/templates/'
 
 tpl_globals:
     static_path: '/static/'

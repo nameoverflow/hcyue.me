@@ -1,8 +1,8 @@
-db = require '../../model/db'
+db = require '../../model/db/model'
 
 module.exports = (conn, params) ->
-    cur = db.find 'Post', {type: 'article'}
-    cur.sort({createDate: 1}).select('createDate').limit(1)
-    cur.exec (err, doc) ->
-        fuck = new Date(doc[0]['createDate']).getFullYear()
-        conn.send 'json', [new Date().getFullYear()..fuck]
+    db.post.find {type: 'article'}
+        .sort({createDate: 1}).select('createDate').limit(1)
+        .exec (err, doc) ->
+            fuck = new Date(doc[0]['createDate']).getFullYear()
+            conn.send 'json', [new Date().getFullYear()..fuck]

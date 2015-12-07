@@ -1,6 +1,8 @@
 module.exports = (app) ->
 
     app.route ['/', '/*'], (conn, params) ->
+        render = require './model/render'
+        render conn
         conn.view 'index'
 
     app.route '/api/article', require './handler/api/article'
@@ -14,7 +16,7 @@ module.exports = (app) ->
     app.route '/admin/edit/{post}', require './handler/admin/edit'
 
 
-    app.route '/static/*', require 'yue/static'
+    app.route '/static/*', (require 'yue/static') './public'
 
     app.route '/favicon.ico', (conn, params) ->
         conn.send 'jump', '/static/favicon.ico'

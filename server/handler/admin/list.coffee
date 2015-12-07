@@ -1,12 +1,10 @@
-db = require '../../model/db'
-query = require 'querystring'
+db = require '../../model/db/model'
 render = require '../../model/render'
+auth = require '../../model/auth'
+query = require 'querystring'
 module.exports = (conn, params) ->
-    conn.session (session) ->
-        if (session.get 'auth') isnt 'admin'
-            return conn.view 'admin/login'
-        fuck =
-            page: false
-        if conn.query && conn.query['pages']
-            fuck.page = true
+    render conn
+    auth conn, () =>
+        fuck = {}
+        fuck.page = if conn.query && conn.query['pages'] then true else false
         conn.view 'admin/index', fuck

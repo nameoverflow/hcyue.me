@@ -1,6 +1,10 @@
-let Link = ReactRouter.Link
-let menu = ['Home', 'Archives', 'Lab', 'About'];
+import React from 'react';
+import {Link} from 'react-router';
+
 class NavBtn extends React.Component {
+    constructor(props) {
+        super(props);
+    }
     render() {
         return (
             <Link to={`/${this.props.name == 'Home' ? '' : this.props.name.toLowerCase()}`} className="NavBtn">
@@ -39,7 +43,7 @@ export default class HeaderMobile extends React.Component {
                 </div>
                 <ul>
             {
-                menu.map(item =>
+                ['Home', 'Archives', 'Lab', 'About'].map(item =>
                     <li onClick={this.clickHandler.bind(this)}>
                         <NavBtn key={item} name={item}/>
                     </li>

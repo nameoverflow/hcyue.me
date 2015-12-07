@@ -1,16 +1,21 @@
+import React from 'react'
+
 import {ajax, heightTrans} from '../../utils'
 import ArticleList from './ArticleList'
 
-var TimeLine = React.createClass({
-    getInitialState() {
-        return {
+export default class TimeLine extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
             state: 'close',
             toggle: 'none',
             data: []
         }
-    },
+    }
+
     handleClick(e) {
         let trans_ele = e.currentTarget.parentNode;
+        console.log(this);
         this.componentDidUpdate = () =>
             heightTrans(trans_ele, 500)
         this.setState({
@@ -32,11 +37,11 @@ var TimeLine = React.createClass({
                 console.log(e)
             );
         }
-    },
+    }
     render() {
         return (
             <section className="TimeLine">
-                <header onClick={this.handleClick}>
+                <header onClick={this.handleClick.bind(this)}>
                     <span className="mark">{this.state.toggle === 'none' ? '+' : '-'}</span>
                     <h2>
                         {this.props.time}
@@ -58,6 +63,4 @@ var TimeLine = React.createClass({
             </section>
         )
     }
-})
-
-export default TimeLine;
+}

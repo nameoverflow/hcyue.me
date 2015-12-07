@@ -1,5 +1,12 @@
-// import React from 'react';
-// import Router from 'react-router'
+import React from 'react'
+import {render} from 'react-dom'
+import {
+    Route,
+    Router,
+    IndexRoute
+} from 'react-router'
+import createBrowserHistory from 'history/lib/createBrowserHistory';
+
 
 import HeaderNav from './components/HeaderNav';
 import HeaderMobile from './components/HeaderMobile';
@@ -9,38 +16,35 @@ import Archives from './components/Archives';
 import Page from './components/Page';
 import Lab from './components/Lab';
 
-var Router = window.ReactRouter;
-var RouteHandler = Router.RouteHandler;
 
-var Main = React.createClass({
+class Main extends React.Component {
+    constructor(props) {
+        super(props);
+    }
     render() {
         return (
             <div id='container'>
                 <HeaderNav/>
                 <HeaderMobile/>
                 <main id='page-main'>
-                    <RouteHandler/>
+                    {this.props.children}
                 </main>
             </div>
         );
     }
-});
-
-var Route = Router.Route;
-var DefaultRoute = Router.DefaultRoute;
-
-var routes = (
-    <Route handler={Main} path='/'>
-        <Route handler={Index} name='home' path="/"/>
-        <Route handler={Archives} name='archives' path="archives"/>
-        <Route handler={Lab} name='lab' path="/lab"/>
-        <Route handler={SingleArticle} name='article' path="article/:id"/>
-        <Route handler={Page} name='page' path="/:title"/>
-        <DefaultRoute handler={Index}/>
-    </Route>
+}
+let history = createBrowserHistory();
+const routes = (
+    <Router history={history}>
+        <Route component={Main} path='/'>
+            <IndexRoute component={Index} name='home' />
+            <Route component={Archives} name='archives' path="archives"/>
+            <Route component={Lab} name='lab' path="lab"/>
+            <Route component={SingleArticle} name='article' path="article/:id"/>
+            <Route component={Page} name='page' path=":title"/>
+        </Route>
+    </Router>
 );
 
 //React.render(<Main />, document.body);
-Router.run(routes, Router.HistoryLocation, (Handler) => {
-    React.render(<Handler/>, document.body);
-});
+render(routes, document.body);
