@@ -21,7 +21,7 @@ module.exports = (conn, params) ->
             tmp = getTmpData params['post']
             if conn.query && conn.query['page']
                 tmp['page'] = true
-            conn.send 'html', render './view/admin/edit.jade', tmp
+            conn.view 'admin/edit', tmp
         else
             db.findById 'Post', params['post'], (err, row) ->
                 if err
@@ -29,4 +29,4 @@ module.exports = (conn, params) ->
                         err: 500
                         message: err
 
-                conn.send 'html', render './view/admin/edit.jade', getTmpData params['post'], row
+                conn.view 'admin/edit', getTmpData params['post'], row

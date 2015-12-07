@@ -9,7 +9,7 @@ import Archives from './components/Archives';
 import Page from './components/Page';
 import Lab from './components/Lab';
 
-var Router = window.ReactRouter
+var Router = window.ReactRouter;
 var RouteHandler = Router.RouteHandler;
 
 var Main = React.createClass({

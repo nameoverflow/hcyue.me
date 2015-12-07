@@ -5,3 +5,9 @@ site:
     view: './view'
     db:
         url: mongodb://localhost/blog
+
+view:
+    path: './server/templates'
+
+tpl_globals:
+    static_path: '/static/'

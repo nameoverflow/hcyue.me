@@ -25,7 +25,7 @@ module.exports = (conn, params) ->
             query_data['createDate']['$gte'] = +conn.query['st']
         if conn.query['et']
             query_data['createDate']['$lte'] = +conn.query['et']
-    console.log query_data
+    # console.log query_data
     cur = db.find 'Post', query_data
     cnt_str = if type is 'summary' then 'summary break' else if type is 'all' then 'body editDate' else ''
     cur.sort({createDate: -1})
