@@ -1,4 +1,9 @@
-var ArticleText = React.createClass({
+import React from 'react'
+
+export default class ArticleText extends React.Component {
+    constructor(props) {
+        super(props);
+    }
     render() {
         return (
             <div
@@ -7,6 +12,6 @@ var ArticleText = React.createClass({
                 />
         );
     }
-});
+}
 
 export default ArticleText;

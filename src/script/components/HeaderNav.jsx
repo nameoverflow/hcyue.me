@@ -1,8 +1,10 @@
-// import React from 'react';
-// import {Link} from 'react-router';
-var Link = ReactRouter.Link
-var menu = ['home', 'archives', 'lab', 'about'];
-var NavBtn =  React.createClass({
+import React from 'react';
+import {Link} from 'react-router';
+
+class NavBtn extends React.Component {
+    constructor(props) {
+        super(props);
+    }
     render() {
         return (
             <Link to={`/${this.props.name == 'home' ? '' : this.props.name}`} className="NavBtn">
@@ -12,9 +14,12 @@ var NavBtn =  React.createClass({
             </Link>
         )
     }
-});
+}
 
-var HeaderNav = React.createClass({
+export default class HeaderNav extends React.Component {
+    constructor() {
+        super();
+    }
     render() {
         return (
             <header id="HeaderNav">
@@ -23,7 +28,7 @@ var HeaderNav = React.createClass({
                 </div>
                 <ul>
             {
-                menu.map(item =>
+                ['home', 'archives', 'lab', 'about'].map(item =>
                     <li>
                         <NavBtn key={item} name={item}/>
 
@@ -34,6 +39,4 @@ var HeaderNav = React.createClass({
             </header>
         )
     }
-});
-
-export default HeaderNav;
+}

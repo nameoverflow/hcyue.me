@@ -1,5 +1,6 @@
+import React from 'react'
 
-let ArticleMeta = React.createClass({
+export default class ArticleMeta extends React.Component {
     render() {
         return (
             <div className="ArticleMeta">
@@ -22,6 +23,4 @@ let ArticleMeta = React.createClass({
             </div>
     )
     }
-});
-
-export default ArticleMeta;
+}

@@ -1,11 +1,14 @@
+import React from 'react'
+import {Link} from 'react-router';
+
 import ArticleTitle from './ArticleTitle';
 import ArticleText from './ArticleText';
 import ArticleMeta from './ArticleMeta';
 import {parseTime} from '../../utils'
-const Link = ReactRouter.Link
+
 export default class ArticleList extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
     }
     render() {
         return (
@@ -16,7 +19,7 @@ export default class ArticleList extends React.Component {
                         <article className="typo">
                             <header>
                                 <ArticleTitle display={this.props.display} className="title-list">
-                                    <Link to="article" params={{id: item._id}}>
+                                    <Link to={`/article/${item._id}`}>
                                         {item.title || ''}
                                     </Link>
                                 </ArticleTitle>
@@ -31,7 +34,7 @@ export default class ArticleList extends React.Component {
                                 <div className="post-more-link" style={{
                                     'display': item.break ? 'block' : 'none'
                                 }}>
-                                    <Link to="article" params={{id: item._id}} className="no-ani">
+                                    <Link to={`/article/${item._id}`} className="no-ani">
                                         ReadOn »
                                     </Link>
                                 </div>

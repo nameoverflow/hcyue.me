@@ -1,17 +1,20 @@
-import {ajax, parseTime} from '../utils';
+import React from 'react';
 
 import ArticleTitle from './_partial/ArticleTitle';
 import ArticleText from './_partial/ArticleText';
 import ArticleMeta from './_partial/ArticleMeta';
 import Wrapper from './_partial/Wrapper'
 
-var Page = React.createClass({
-    getInitialState() {
-        return {
+import {ajax, parseTime} from '../utils';
+
+export default class Page extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
             show: false,
             body: '<p>loading...</p>'
         };
-    },
+    }
 
     componentDidMount() {
         //this.setState({body: 'Loading....'});
@@ -19,10 +22,10 @@ var Page = React.createClass({
             'title': this.props.params.title,
             'page': true
         }).then(data => {
-            if (!data[0] || !data) {
+            if (!data) {
                 return this.setState({body: 'Not found!'});
             }
-            this.setState(data[0]);
+            this.setState(data);
         }, data => {
             return this.setState({body: data.message});
         }).then(() =>
@@ -35,9 +38,7 @@ var Page = React.createClass({
         ).catch(data => {
             console.log(data);
         });
-    },
-    componentWillReceiveProps() {
-    },
+    }
     render() {
         return (
             <Wrapper show={this.state.show}>
@@ -48,6 +49,4 @@ var Page = React.createClass({
             </Wrapper>
         );
     }
-});
-
-export default Page;
+}

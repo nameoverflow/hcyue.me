@@ -49,24 +49,12 @@ postSchema = new Schema {
         type: Boolean
         default: false
 }
-tagSchema = new Schema {
-    name: String
-    contain: [String]
-}
-mong.model 'Post', postSchema
-mong.model 'Tag', tagSchema
+
+post = mong.model 'Post', postSchema
 
 module.exports =
-    findById: (model_name, id, callback) ->
-        (mong.model model_name).findOne {_id: id}, callback
-    add: (model_name, data, callback) ->
-        (mong.model model_name).create data, callback
-    find: (model_name, condi, callback) ->
-        (mong.model model_name).find condi
-    update: (model_name, condi, data, callback) ->
-        (mong.model model_name).update condi, data, callback
-    del: (model_name, condi, callback) ->
-        (mong.model model_name).remove condi, callback
+    post: post
+
 # module.exports.findById = (model_name, id, callback) ->
 #     (mong.model model_name).findOne {_id: id}, callback
 #

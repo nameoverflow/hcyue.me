@@ -1,6 +1,4 @@
-# 
-# 
-# 
+
 module.exports = (conn, next) ->
     conn.session (session) =>
         if (session.get 'auth') isnt 'admin'

@@ -1,15 +1,18 @@
-import {ajax, parseTime} from '../utils';
+import React from 'react';
 
 import ArticleTitle from './_partial/ArticleTitle';
 import ArticleText from './_partial/ArticleText';
 import ArticleMeta from './_partial/ArticleMeta';
 
-var Lab = React.createClass({
-    getInitialState() {
-        return {
+import {ajax, parseTime} from '../utils';
+
+export default class Lab extends React.Component({
+    constructor(props) {
+        super(props);
+        this.state = {
             body: '<p>Building...</p>'
         };
-    },
+    }
     render() {
         return (
             <div id="wrapper">
@@ -20,6 +23,4 @@ var Lab = React.createClass({
             </div>
         );
     }
-});
-
-export default Lab;
+}

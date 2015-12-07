@@ -1,5 +1,4 @@
-// import React from 'react';
-import {ajax, parseTime} from '../utils';
+import React from 'react';
 
 import ArticleTitle from './_partial/ArticleTitle';
 import ArticleText from './_partial/ArticleText';
@@ -7,9 +6,11 @@ import ArticleMeta from './_partial/ArticleMeta';
 import Comment from './_partial/Comment';
 import Wrapper from './_partial/Wrapper'
 
+import {ajax, parseTime} from '../utils';
+
 export default class SingleArticle extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             show: false,
             body: '<p>loading...</p>'

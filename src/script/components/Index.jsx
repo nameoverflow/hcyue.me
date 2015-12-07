@@ -1,4 +1,4 @@
-// import React from 'react';
+import React from 'react';
 import {ajax, getEleTop, parseTime, getArticles, getScrollHeight} from '../utils';
 
 import ArticleList from './_partial/ArticleList'
@@ -32,6 +32,7 @@ export default class Index extends React.Component {
     // componentWillUnmount() {
     //     window.removeEventListener('scroll', handleScroll);
     // }
+    /*
     handleScroll() {
         let cur_scroll = document.body.scrollTop || document.documentElement.scrollTop,
             height = getScrollHeight(),
@@ -40,7 +41,7 @@ export default class Index extends React.Component {
             load_state = 1;
             this.load('summary', this.state.loaded);
         }
-    }
+    }*/
     load(type, start=0, limit=10) {
         return getArticles(type, start, limit).then(data => {
             let end = false;
@@ -85,5 +86,3 @@ export default class Index extends React.Component {
         );
     }
 }
-
-export default Index;
