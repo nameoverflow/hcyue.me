@@ -47,4 +47,4 @@ const routes = (
 );
 
 //React.render(<Main />, document.body);
-render(routes, document.body);
+render(routes, document.getElementById('silly-react-warning'));

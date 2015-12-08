@@ -1,19 +1,13 @@
 import React from 'react'
-export default class ArticleTitle extends React.Component {
-    constructor(props) {
-        super(props);
+const ArticleTitle = (props) =>
+    <div className={props.className}>
+    {
+    props.display !== 'title' ? (
+        <h1>{props.children}</h1>
+        ) : (
+        <h4>{props.children}</h4>
+        )
     }
-    render() {
-        return (
-            <div className={this.props.className}>
-        {
-            this.props.display !== 'title' ? (
-                <h1>{this.props.children}</h1>
-            ) : (
-                <h4>{this.props.children}</h4>
-            )
-        }
-            </div>
-        );
-    }
-}
+    </div>
+
+export default ArticleTitle;

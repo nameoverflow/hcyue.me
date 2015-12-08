@@ -19,7 +19,7 @@ function compile(src, out) {
 }
 
 gulp.task('c', function() {
-    compile('main.jsx', 'main.js').pipe(streamify(uglify())).pipe(gulp.dest('./public/script'));
+    compile('main.jsx', 'main.js')./*pipe(streamify(uglify())).*/pipe(gulp.dest('./public/script'));
     compile('admin.js', 'admin.js').pipe(streamify(uglify())).pipe(gulp.dest('./public/script'));
 });
 gulp.task('b', function() {

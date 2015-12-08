@@ -1,20 +1,12 @@
 import React from 'react';
 import {Link} from 'react-router';
 
-class NavBtn extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-    render() {
-        return (
-            <Link to={`/${this.props.name == 'Home' ? '' : this.props.name.toLowerCase()}`} className="NavBtn">
-                <div>
-                    {this.props.name}
-                </div>
-            </Link>
-        )
-    }
-}
+const NavBtn = ({name}) =>
+    <Link to={`/${name == 'Home' ? '' : name.toLowerCase()}`} className="NavBtn">
+        <div>
+            {name}
+        </div>
+    </Link>
 
 export default class HeaderMobile extends React.Component {
     constructor() {
@@ -42,13 +34,13 @@ export default class HeaderMobile extends React.Component {
                     />
                 </div>
                 <ul>
-            {
-                ['Home', 'Archives', 'Lab', 'About'].map(item =>
-                    <li onClick={this.clickHandler.bind(this)}>
-                        <NavBtn key={item} name={item}/>
-                    </li>
-                )
-            }
+                {
+                    ['Home', 'Archives', 'Lab', 'About'].map(item =>
+                        <li key={item} onClick={this.clickHandler.bind(this)}>
+                            <NavBtn name={item}/>
+                        </li>
+                    )
+                }
                 </ul>
             </header>
         );
