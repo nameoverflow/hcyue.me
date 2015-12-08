@@ -6,7 +6,7 @@ import ArticleMeta from './_partial/ArticleMeta';
 
 import {ajax, parseTime} from '../utils';
 
-export default class Lab extends React.Component({
+export default class Lab extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
