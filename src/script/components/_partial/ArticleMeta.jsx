@@ -11,7 +11,7 @@ const ArticleMeta = ({tags, time}) =>
         {tags && tags[0] ? ' |' : ''}
         {
             tags && tags.map(tag =>
-                <a href="#" key="tag">
+                <a href="#" key={tag}>
                     {' { '}
                     <span className="meta-text">{tag}</span>
                     {' } '}
