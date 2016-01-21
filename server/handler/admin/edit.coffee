@@ -1,6 +1,7 @@
 db = require '../../model/db/model'
 render = require '../../model/render'
 auth = require '../../model/auth'
+post = db.post
 
 getTmpData = (id, row) ->
     if id is 'new'
@@ -24,7 +25,7 @@ module.exports = (conn, params) ->
                 tmp['page'] = true
             conn.view 'admin/edit', tmp
         else
-            db.findById 'Post', params['post'], (err, row) ->
+            post.findOne {_id: params['post']}, (err, row) ->
                 if err
                     conn.die
                         err: 500

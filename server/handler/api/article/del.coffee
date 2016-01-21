@@ -11,4 +11,4 @@ module.exports = (conn, params) ->
                 err: 403
             }
         else
-            db.rm 'Post', {_id: conn.query['id']}, dbCb conn
+            db.remove 'Post', {_id: conn.query['id']}, dbCb conn
