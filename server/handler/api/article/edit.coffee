@@ -19,7 +19,7 @@ module.exports = (conn, params) ->
 
         if !conn.query || (conn.query['post'] is 'new')
             conn.query && conn.query['page'] && post_data['type'] = 'page'
-            post.add post_data, callback
+            post.create post_data, callback
         else
             post_id = conn.query['post']
             post_data['editDate'] = Date.now()
