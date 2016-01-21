@@ -1,5 +1,5 @@
 
-module.exports = (err, doc) =>
+module.exports = (conn) => (err, doc) =>
     console.log 'accepted', doc
     if err
         console.log err
