@@ -13,11 +13,15 @@
         @include clearfix()
 
     .ArticleMeta
-        float: right
-        padding: 0.7rem 0 0
+        position: absolute
+        right: 0
+        bottom: 0
+        margin-bottom: 0.6rem
+        padding: 0
     .title-list
         float: left
         text-align: left
+        padding: 0
         @media #{$mid_scr}
             float: none
     .mark
@@ -27,4 +31,4 @@
         > li
             > article
                 &::after
-                    margin: 0.3rem 1rem
+                    margin: 0.3rem 0

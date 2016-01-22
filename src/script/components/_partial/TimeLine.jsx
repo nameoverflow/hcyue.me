@@ -7,41 +7,44 @@ export default class TimeLine extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            state: 'close',
+            state: 0,
             toggle: 'none',
             data: []
         }
     }
-
+    componentDidUpdate() {
+        heightTrans(this.refs.transEle, 500);
+    }
     handleClick(e) {
-        let trans_ele = e.currentTarget.parentNode;
-        console.log(this);
-        this.componentDidUpdate = () =>
-            heightTrans(trans_ele, 500)
+        //let trans_ele = e.currentTarget.parentNode;
+        //this.componentDidUpdate = () => heightTrans(trans_ele, 500);
         this.setState({
-            state: this.state.state === 'loaded' ? 'loaded' : 'loading',
+            state: this.state.state === 2 ? 2 : 1,
             toggle: this.state.toggle === 'none' ? 'block' : 'none'
         })
-        //heightTrans(trans_ele);
-        if (this.state.state !== 'loaded') {
+        // heightTrans(this.refs.transEle, 500);
+        if (this.state.state !== 2) {
             ajax.get('/api/article', {
                 'st': new Date(this.props.time, 0, 1).getTime(),
                 'et': new Date(this.props.time + 1, 0, 0).getTime()
             }).then(data => {
                 this.setState({
-                    state: 'loaded',
+                    state: 2,
                     data: data
                 });
-                //heightTrans(trans_ele, 1500);
+                console.log(this.refs.transEle);
+                // return heightTrans(this.refs.transEle, 500);
             }).catch(e =>
                 console.log(e)
             );
+        } else {
+            // heightTrans(this.refs.transEle, 500);
         }
     }
     render() {
         return (
-            <section className="TimeLine">
-                <header onClick={this.handleClick.bind(this)}>
+            <section className="TimeLine" ref="transEle">
+                <header onClick={e => this.handleClick(e)}>
                     <span className="mark">{this.state.toggle === 'none' ? '+' : '-'}</span>
                     <h2>
                         {this.props.time}
@@ -49,7 +52,7 @@ export default class TimeLine extends React.Component {
                 </header>
                 <main style={{'display': this.state.toggle}}>
             {
-                this.state.state === 'loaded' ? (
+                this.state.state === 2 ? (
                     <ArticleList display='title'>
                         {this.state.data}
                     </ArticleList>

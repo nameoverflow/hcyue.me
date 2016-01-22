@@ -5,11 +5,11 @@ import ArticleList from './_partial/ArticleList'
 import Wrapper from './_partial/Wrapper'
 
 let load_state = 0,
-    handleScroll;
+    cache = {};
 export default class Index extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
+        this.state = cache.archives ? (cache.show = false, cache) : {
             archives: [],
             next: [],
             loaded: 0,
@@ -18,55 +18,34 @@ export default class Index extends React.Component {
         };
     }
     componentDidMount() {
-        this.load('summary')
-        .then(() =>
-            this.load('summary', this.state.loaded)
-        ).then(() =>
-            this.setState({show: true})
-        );
-        // handleScroll = () => this.handleScroll;
-        // console.log(handleScroll);
-        // window.addEventListener('scroll', handleScroll);
-        //
-    }
-    // componentWillUnmount() {
-    //     window.removeEventListener('scroll', handleScroll);
-    // }
-    /*
-    handleScroll() {
-        let cur_scroll = document.body.scrollTop || document.documentElement.scrollTop,
-            height = getScrollHeight(),
-            active_height = window.innerHeight * 1.2;
-        if (height - cur_scroll < active_height && !load_state && !this.state.end) {
-            load_state = 1;
-            this.load('summary', this.state.loaded);
+        if (cache.archives) {
+            return setTimeout(() => this.setState({show: true}), 0);
         }
-    }*/
+        this.load('summary')
+        .then(() => this.load('summary', this.state.loaded))
+        .then(() => (this.setState({show: true}), Object.assign(cache, this.state)));
+    }
     load(type, start=0, limit=10) {
         return getArticles(type, start, limit).then(data => {
-            let end = false;
-            if (!data[0]) {
-                end = true;
-            }
             this.setState({
                 archives: this.state.archives.concat(this.state.next),
                 next: data,
                 loaded: this.state.loaded + data.length,
-                end: end
+                end: !data[0]
             });
+            Object.assign(cache, this.state);
             load_state = 0;
-        }, (data) => {
-            return this.setState({
+        }, data => {
+            this.setState({
                 archives: this.state.archives.concat({body: data.message})
             });
+            Object.assign(cache, this.state);
         }).then(() =>
-            hljs && [].forEach.call(
+            hljs && [].map.call(
                 document.querySelectorAll('pre code:not(.hljs)'),
                 hljs.highlightBlock
             )
-        ).catch(data => {
-            console.log(data);
-        });
+        ).catch(data => console.log(data));
     }
     render() {
         return (

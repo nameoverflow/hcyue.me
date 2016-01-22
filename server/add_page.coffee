@@ -1,6 +1,7 @@
-db = require 'model/db.coffee'
+db = require 'model/db/model'
 marked = require 'marked'
 
+post = db.post
 post_data =
     'title': 'About'
     'body': marked conn.body['body']

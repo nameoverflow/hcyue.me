@@ -13,9 +13,7 @@ export default class Archives extends React.Component {
     }
     componentDidMount() {
         this.loadTimeLine()
-        .then(() =>
-            this.setState({show: true})
-        );
+        .then(() => this.setState({show: true}));
     }
     loadTimeLine() {
         return ajax.get('/api/time').then(data =>
@@ -31,9 +29,7 @@ export default class Archives extends React.Component {
         return (
             <Wrapper show={this.state.show}>
         {
-            this.state.years.map(year =>
-                <TimeLine time={year} />
-            )
+            this.state.years.map(year => <TimeLine time={year} />)
         }
             </Wrapper>
         )

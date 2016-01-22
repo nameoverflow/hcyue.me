@@ -1,11 +1,10 @@
 //require("babel/polyfill");
 import "babel-core/polyfill";
-
+import NProgress from 'nprogress'
 export var ajax = {
     request(method, url, req_data) {
         return new Promise((resolve, reject) => {
             let xhr = new XMLHttpRequest();
-
             xhr.open(method, url, true);
 
             xhr.onload = () => {
@@ -69,11 +68,12 @@ export var verticalTitle = (elem) => {
 }
 
 export const getArticles = (type, start=0, limit=10) => {
+    NProgress.start();
     return ajax.get('/api/article', {
         'start': start,
         'limit': limit,
         'type': type
-    });
+    }).then((data) => (NProgress.done(), data));
 };
 
 export var getScrollHeight = function () {
@@ -88,19 +88,22 @@ export var getScrollHeight = function () {
 　　return scrollHeight;
 }
 
-export var heightTrans = function(elem, time) { // time, 数值，可缺省
+export var heightTrans = function(elem, time, callback) { // time, 数值，可缺省
     if (typeof window.getComputedStyle == "undefined") return;
 
     let height = window.getComputedStyle(elem).height;
-
     //elem.style.transition = "none";    // 本行2015-05-20新增，mac Safari下，貌似auto也会触发transition, 故要none下~
 
     elem.style.height = "auto";
     let targetHeight = window.getComputedStyle(elem).height;
+    console.log(`from ${height} to ${targetHeight}`)
     elem.style.height = height;
-    setTimeout(() => {
-        if (time)
-             elem.style.transition = "height "+ time +"ms ease-in-out";
-        elem.style.height = targetHeight;
-    }, 5);
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            if (time)
+                 elem.style.transition = "height "+ time +"ms ease-in-out";
+            elem.style.height = targetHeight;
+            callback && elem.addEventListener("transitionend", (e) => resolve(e), false);
+        }, 5);
+    })
 };
