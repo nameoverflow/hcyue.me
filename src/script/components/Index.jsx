@@ -23,7 +23,7 @@ export default class Index extends React.Component {
         }
         this.load('summary')
         .then(() => this.load('summary', this.state.loaded))
-        .then(() => (this.setState({show: true}), Object.assign(cache, this.state)));
+        .then(() => this.setState({show: true}));
     }
     load(type, start=0, limit=10) {
         return getArticles(type, start, limit).then(data => {
@@ -32,14 +32,12 @@ export default class Index extends React.Component {
                 next: data,
                 loaded: this.state.loaded + data.length,
                 end: !data[0]
-            });
-            Object.assign(cache, this.state);
+            }, () => Object.assign(cache, this.state));
             load_state = 0;
         }, data => {
             this.setState({
                 archives: this.state.archives.concat({body: data.message})
-            });
-            Object.assign(cache, this.state);
+            }, () => Object.assign(cache, this.state));
         }).then(() =>
             hljs && [].map.call(
                 document.querySelectorAll('pre code:not(.hljs)'),

@@ -21,16 +21,13 @@ export default class Archives extends React.Component {
                 years: data
             })
             // console.log(data);
-        ).catch(e =>
-            console.log(e)
-        );
+        ).catch(e => console.log(e));
     }
     render() {
+        const line = this.state.years.map(time => <TimeLine time={time} key={time}/>);
         return (
             <Wrapper show={this.state.show}>
-        {
-            this.state.years.map(year => <TimeLine time={year} />)
-        }
+                { line }
             </Wrapper>
         )
     }

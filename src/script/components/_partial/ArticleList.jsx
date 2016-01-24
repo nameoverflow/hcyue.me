@@ -6,7 +6,7 @@ import ArticleText from './ArticleText';
 import ArticleMeta from './ArticleMeta';
 import {parseTime} from '../../utils'
 
-const ArticleList = ({children, display}) =>
+const ArticleList = ({children, display}) => 
     <ul className="ArticleList">
     {
     children.map(item =>
@@ -36,8 +36,7 @@ const ArticleList = ({children, display}) =>
                 </main>
             }
             </article>
-        </li>
-    )
+        </li>)
     }
     </ul>
 

@@ -1,8 +1,19 @@
 .TimeLine
-    transition: height 1.5s
-    transition-timing-function: ease-in-out
-    transition-delay: 0s
+    // transition: height
+    // transition-duration: 1.5s
+    // transition-timing-function: ease-in-out
+    // transition-delay: 0s
     overflow: hidden
+    > main
+        transition: opacity 500ms ease-in-out
+        &.hidden
+            display: none
+        &.show
+            display: block
+            opacity: 1
+        &.active
+            display: block
+            opacity: 0
     > header
         position: relative
         padding: 3% 5%
@@ -27,6 +38,13 @@
     .mark
         position: absolute
         left: 2.5%
+        transform: rotate(0)
+        transition: transform 300ms
+        transition-timing-function: ease-in-out
+        transform-origin: 50% 54%
+
+    .mark-active
+        transform: rotate(45deg)
     .ArticleList
         > li
             > article

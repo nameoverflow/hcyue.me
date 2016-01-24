@@ -3,9 +3,11 @@ import {render} from 'react-dom'
 import {
     Route,
     Router,
-    IndexRoute
+    IndexRoute,
+    browserHistory
 } from 'react-router'
-import createBrowserHistory from 'history/lib/createBrowserHistory';
+import { createHistory } from 'history'
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 
 
 import HeaderNav from './components/HeaderNav';
@@ -16,26 +18,24 @@ import Archives from './components/Archives';
 import Page from './components/Page';
 import Lab from './components/Lab';
 
-
 class Main extends React.Component {
     constructor(props) {
         super(props);
     }
     render() {
+        const head = window.innerWidth > 1024 ? <HeaderNav/> : <HeaderMobile/>
         return (
             <div id='container'>
-                <HeaderNav/>
-                <HeaderMobile/>
+                { head }
                 <main id='page-main'>
-                    {this.props.children}
+                    { this.props.children }
                 </main>
             </div>
         );
     }
 }
-let history = createBrowserHistory();
 const routes = (
-    <Router history={history}>
+    <Router history={createHistory()} key="fuck">
         <Route component={Main} path='/'>
             <IndexRoute component={Index} name='home' />
             <Route component={Archives} name='archives' path="archives"/>

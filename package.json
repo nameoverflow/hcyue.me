@@ -9,15 +9,16 @@
   },
   "author": "",
   "dependencies": {
-    "history": "^1.14.0",
+    "history": "^1.17.0",
     "jade": "^1.11.0",
     "js-yaml": "*",
     "marked": "^0.3.5",
     "mongoose": "*",
     "nprogress": "^0.2.0",
     "react": "^0.14.3",
+    "react-addons-css-transition-group": "^0.14.6",
     "react-dom": "^0.14.3",
-    "react-router": "^1.0.1",
+    "react-router": "^1.0.3",
     "yue": "*"
   },
   "devDependencies": {

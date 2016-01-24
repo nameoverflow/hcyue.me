@@ -8,21 +8,26 @@ export default class TimeLine extends React.Component {
         super(props);
         this.state = {
             state: 0,
-            toggle: 'none',
+            toggle: 0,
+            animate: 0,
             data: []
         }
     }
-    componentDidUpdate() {
+    /*componentDidUpdate() {
         heightTrans(this.refs.transEle, 500);
-    }
+    }*/
     handleClick(e) {
         //let trans_ele = e.currentTarget.parentNode;
         //this.componentDidUpdate = () => heightTrans(trans_ele, 500);
         this.setState({
-            state: this.state.state === 2 ? 2 : 1,
-            toggle: this.state.toggle === 'none' ? 'block' : 'none'
-        })
-        // heightTrans(this.refs.transEle, 500);
+            state: this.state.state || 1,
+            toggle: +!this.state.toggle,
+            animate: +!this.state.toggle
+        }, () => {
+            heightTrans(this.refs.transEle, this.state.toggle ? 500 : 0);
+            this.setState({animate: this.state.toggle ? 2 : 0});
+        });
+        // 
         if (this.state.state !== 2) {
             ajax.get('/api/article', {
                 'st': new Date(this.props.time, 0, 1).getTime(),
@@ -32,36 +37,33 @@ export default class TimeLine extends React.Component {
                     state: 2,
                     data: data
                 });
-                console.log(this.refs.transEle);
-                // return heightTrans(this.refs.transEle, 500);
+                // console.log(this.refs.transEle);
+                return heightTrans(this.refs.transEle, 500);
             }).catch(e =>
                 console.log(e)
             );
-        } else {
-            // heightTrans(this.refs.transEle, 500);
         }
     }
     render() {
+        const content = this.state.state === 2 ? 
+                        <ArticleList display='title'>
+                            {this.state.data}
+                        </ArticleList>
+                        :
+                        <article id="end-list">
+                            Loading....
+                        </article>
+
         return (
             <section className="TimeLine" ref="transEle">
                 <header onClick={e => this.handleClick(e)}>
-                    <span className="mark">{this.state.toggle === 'none' ? '+' : '-'}</span>
+                    <span className={this.state.toggle ? "mark mark-active" : "mark"}>+</span>
                     <h2>
                         {this.props.time}
                     </h2>
                 </header>
-                <main style={{'display': this.state.toggle}}>
-            {
-                this.state.state === 2 ? (
-                    <ArticleList display='title'>
-                        {this.state.data}
-                    </ArticleList>
-                ) : (
-                    <article id="end-list">
-                        Loading....
-                    </article>
-                )
-            }
+                <main className={['hidden', 'active', 'show'][this.state.animate]}>
+                    {content}
                 </main>
             </section>
         )

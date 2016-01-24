@@ -23,11 +23,13 @@ export default class Page extends React.Component {
             'page': true
         }).then(data => {
             if (!data) {
-                return this.setState({body: 'Not found!'});
+                this.setState({body: 'Not found!'});
+                return;
             }
             this.setState(data);
         }, data => {
-            return this.setState({body: data.message});
+            this.setState({body: data.message});
+            return;
         }).then(() =>
             hljs && Array.prototype.forEach.call(
                 document.querySelectorAll('pre code:not(.hljs)'),

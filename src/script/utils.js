@@ -6,14 +6,17 @@ export var ajax = {
         return new Promise((resolve, reject) => {
             let xhr = new XMLHttpRequest();
             xhr.open(method, url, true);
+            NProgress.start();
 
             xhr.onload = () => {
                 if (xhr.status >= 200 && xhr.status <= 400) {
                     let data = JSON.parse(xhr.responseText);
                     resolve(data);
+                    NProgress.done();
                 } else {
                     let data = JSON.parse(xhr.responseText);
                     reject(data);
+                    NProgress.done();
                 }
             }
             xhr.send(req_data);
@@ -68,12 +71,11 @@ export var verticalTitle = (elem) => {
 }
 
 export const getArticles = (type, start=0, limit=10) => {
-    NProgress.start();
     return ajax.get('/api/article', {
         'start': start,
         'limit': limit,
         'type': type
-    }).then((data) => (NProgress.done(), data));
+    });
 };
 
 export var getScrollHeight = function () {
@@ -88,7 +90,7 @@ export var getScrollHeight = function () {
 　　return scrollHeight;
 }
 
-export var heightTrans = function(elem, time, callback) { // time, 数值，可缺省
+export var heightTrans = function(elem, time, callback) {
     if (typeof window.getComputedStyle == "undefined") return;
 
     let height = window.getComputedStyle(elem).height;
@@ -96,12 +98,11 @@ export var heightTrans = function(elem, time, callback) { // time, 数值，可�
 
     elem.style.height = "auto";
     let targetHeight = window.getComputedStyle(elem).height;
-    console.log(`from ${height} to ${targetHeight}`)
+    // console.log(`from ${height} to ${targetHeight}`)
     elem.style.height = height;
     return new Promise((resolve, reject) => {
         setTimeout(() => {
-            if (time)
-                 elem.style.transition = "height "+ time +"ms ease-in-out";
+            elem.style.transition = time ? `height ${time}ms ease` : "";
             elem.style.height = targetHeight;
             callback && elem.addEventListener("transitionend", (e) => resolve(e), false);
         }, 5);
