@@ -1,3 +1,5 @@
+@import 'sassCore/function'
+@import 'media'
 html
     background-color: #eee
 
@@ -43,10 +45,15 @@ a:not(.no-ani)
     &:hover::before
         visibility: visible
         transform: scaleX(1)
-
-pre > code.hljs
-    font-family: "Monaco", "Menlo", "Consolas", monospace
+.highlight pre, pre code
+    font-family: "Monaco", "Menlo", "Consolas", "Microsoft Yahei", monospace
+    background: #f8f8f8
     font-size: 13px
+    /*border: 1px solid #ddd*/
+    padding: 1em 1.5em
+    display: block
+    -webkit-overflow-scrolling: touch
+
 
 
 @media #{$mid_scr}

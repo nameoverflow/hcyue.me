@@ -1,4 +1,5 @@
 import React from 'react'
+import 'ref/github.css'
 
 const ArticleText = ({children}) =>
     <div

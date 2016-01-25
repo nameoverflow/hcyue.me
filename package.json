@@ -5,16 +5,20 @@
   "repository": "https://github.com/NameIsUseless/blog",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "node devServer.js",
+    "deploy": "webpack -p --config webpack.production.config.js"
   },
   "author": "",
   "dependencies": {
+    "babel-polyfill": "^6.3.14",
     "history": "^1.17.0",
     "jade": "^1.11.0",
     "js-yaml": "*",
     "marked": "^0.3.5",
     "mongoose": "*",
     "nprogress": "^0.2.0",
+    "pygmentize-bundled": "^2.3.0",
     "react": "^0.14.3",
     "react-addons-css-transition-group": "^0.14.6",
     "react-dom": "^0.14.3",
@@ -22,12 +26,19 @@
     "yue": "*"
   },
   "devDependencies": {
-    "babelify": "^6.3.0",
-    "browserify": "*",
-    "gulp": "*",
-    "gulp-sass": "*",
-    "gulp-streamify": "^1.0.2",
-    "gulp-uglify": "^1.4.1",
-    "vinyl-source-stream": "*"
+    "babel-core": "^6.0.20",
+    "babel-eslint": "^4.1.3",
+    "babel-loader": "^6.0.1",
+    "babel-preset-es2015": "^6.0.15",
+    "babel-preset-react": "^6.0.15",
+    "babel-preset-stage-0": "^6.0.15",
+    "css-loader": "^0.23.1",
+    "eslint-plugin-react": "^3.6.2",
+    "node-sass": "^3.4.2",
+    "react-hot-loader": "^1.3.0",
+    "sass-loader": "^3.1.2",
+    "style-loader": "^0.13.0",
+    "webpack": "^1.12.2",
+    "webpack-dev-server": "^1.12.1"
   }
 }

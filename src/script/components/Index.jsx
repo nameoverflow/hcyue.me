@@ -3,7 +3,7 @@ import {ajax, getEleTop, parseTime, getArticles, getScrollHeight} from '../utils
 
 import ArticleList from './_partial/ArticleList'
 import Wrapper from './_partial/Wrapper'
-
+import 'Article.sass'
 let load_state = 0,
     cache = {};
 export default class Index extends React.Component {

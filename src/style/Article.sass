@@ -1,0 +1,97 @@
+@import 'sassCore/function'
+@import 'media'
+$nav_width: 300px
+$main_inside: 20px
+$article_margin: 10%
+
+
+.ArticleList
+    padding: 0
+    margin: 0
+    > li
+        list-style: none
+    article
+        &::after
+            display: block
+            content: ""
+            width: auto
+            height: 1px
+            //background-color: #ccc
+            border-bottom: 1px #ccc dashed
+            margin: 6rem 350px
+#end-list
+    text-align: center
+    color: #999
+    padding-bottom: 1em
+    cursor: pointer
+    &:hover
+        color: #333
+
+article
+    position: relative
+    //max-width: $article_width
+    width: auto
+    padding-left: $article_margin
+    padding-right: $article_margin
+
+.SingleArticle
+    padding: 34px 10%
+
+
+.title-list, .title-single
+    h1
+        margin: 0
+        color: #111
+        font-family: "Microsoft JhengHei", 'PingFang SC', 'Lantinghei SC', 'Microsoft Yahei', 'Hiragino Sans GB', 'Microsoft Sans Serif', 'WenQuanYi Micro Hei', sans
+
+
+.title-list
+    padding: 1rem 0
+.title-list, .ArticleMeta
+    text-align: center
+    a
+        text-decoration: none
+        color: inherit
+        &:visited, &:hover, &:active
+            color: inherit
+
+.title-single
+    position: absolute
+    right: 5%
+    transform: rotate(90deg)
+    transform-origin: right center
+
+    // writing-mode: vertical-rl
+    // -webkit-writing-mode: vertical-rl
+
+    h1
+        font-size: 2em
+        text-align: right
+
+.ArticleMeta
+    font-size: 0.8rem
+    color: #bbb
+    margin-bottom: 1rem
+    &:hover
+        color: #333
+    p
+        margin-bottom: 5px
+    .meta-text
+        color: #333
+.ArticleList .ArticleMeta
+    padding-bottom: 0.5em
+    i
+        margin-right: 0.3em
+
+.SingleArticle .ArticleMeta
+    text-align: right
+    p
+        margin-right: 3em
+.post-more-link
+    padding-top: 1rem
+    a
+        color: #999
+        border-bottom: 2px solid #999
+        &:hover
+            color: #5B4947
+            border-bottom: 2px solid #5B4947

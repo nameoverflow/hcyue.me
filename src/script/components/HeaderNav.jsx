@@ -1,5 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router';
+import 'HeaderNav.sass'
 
 const NavBtn = ({name}) =>
     <Link to={`/${name == 'home' ? '' : name}`} className="NavBtn">

@@ -9,6 +9,10 @@ import {
 import { createHistory } from 'history'
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 
+import '_normalize.scss'
+import 'ref/typo.css'
+import '_main.sass'
+import 'ref/nprogress.css'
 
 import HeaderNav from './components/HeaderNav';
 import HeaderMobile from './components/HeaderMobile';
@@ -17,6 +21,8 @@ import Index from './components/Index';
 import Archives from './components/Archives';
 import Page from './components/Page';
 import Lab from './components/Lab';
+
+
 
 class Main extends React.Component {
     constructor(props) {

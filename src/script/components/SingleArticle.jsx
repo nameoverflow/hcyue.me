@@ -7,6 +7,7 @@ import Comment from './_partial/Comment';
 import Wrapper from './_partial/Wrapper'
 
 import {ajax, parseTime} from '../utils';
+import 'Article.sass'
 
 export default class SingleArticle extends React.Component {
     constructor(props) {

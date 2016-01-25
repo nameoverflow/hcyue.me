@@ -6,6 +6,7 @@ import ArticleMeta from './_partial/ArticleMeta';
 import Wrapper from './_partial/Wrapper'
 
 import {ajax, parseTime} from '../utils';
+import 'Article.sass'
 
 export default class Lab extends React.Component {
     constructor(props) {

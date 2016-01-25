@@ -3,6 +3,7 @@ import {ajax} from '../utils'
 import TimeLine from './_partial/TimeLine'
 import Wrapper from './_partial/Wrapper'
 
+import 'Archives.sass'
 export default class Archives extends React.Component {
     constructor(props) {
         super(props);
