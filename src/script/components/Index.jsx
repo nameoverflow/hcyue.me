@@ -38,12 +38,7 @@ export default class Index extends React.Component {
             this.setState({
                 archives: this.state.archives.concat({body: data.message})
             }, () => Object.assign(cache, this.state));
-        }).then(() =>
-            hljs && [].map.call(
-                document.querySelectorAll('pre code:not(.hljs)'),
-                hljs.highlightBlock
-            )
-        ).catch(data => console.log(data));
+        }).catch(data => console.log(data));
     }
     render() {
         return (

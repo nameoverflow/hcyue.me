@@ -34,9 +34,7 @@ export default class SingleArticle extends React.Component {
             this.setState({
                 mh: h + 20 + 'px'
             })
-        }).then(() =>
-            hljs && Array.prototype.forEach.call(document.querySelectorAll('pre code:not(.hljs)'), hljs.highlightBlock)
-        ).catch(data => {
+        }).catch(data => {
             console.log(data);
         }).then(() =>
             this.setState({show: true})

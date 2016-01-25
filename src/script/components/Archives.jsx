@@ -29,6 +29,7 @@ export default class Archives extends React.Component {
         return (
             <Wrapper show={this.state.show}>
                 { line }
+                Fuck GFW
             </Wrapper>
         )
     }
