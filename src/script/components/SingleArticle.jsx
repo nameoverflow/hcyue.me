@@ -20,30 +20,27 @@ export default class SingleArticle extends React.Component {
     componentDidMount() {
         ajax.get('/api/article', {
             'id': this.props.params.id
-        }).then(data => {
-            if (!data) {
-                return this.setState({body: 'id not found!'});
-            }
-            this.setState(data);
-        }, data => {
-            return this.setState({body: data.message});
-        }).then(() => {
-            let el = document.getElementsByClassName('title-single')[0],
-                h = el.clientWidth;
-            el.style.top = h + 10 + 'px';
-            this.setState({
-                mh: h + 20 + 'px'
+        })
+            .then(data => {
+                if (!data) {
+                    this.setState({body: 'id not found!'});
+                    return;
+                }
+                this.setState(data);
+            }, data => this.setState({body: data.message}))
+            .then(() => {
+                let el = document.getElementsByClassName('title-single')[0],
+                    h = el.clientWidth;
+                el.style.top = h + 10 + 'px';
+                this.refs.articleView.style.minHeight = h + 20 + 'px';
             })
-        }).catch(data => {
-            console.log(data);
-        }).then(() =>
-            this.setState({show: true})
-        );
+            .catch(e => console.log(e))
+            .then(() => this.setState({show: true}));
     }
     render() {
         return (
             <Wrapper show={this.state.show}>
-                <article className="SingleArticle typo" style={{'minHeight': this.state.mh}}>
+                <article className="SingleArticle typo" ref="articleView">
                     <ArticleTitle className="title-single">
                         {this.state.title || ''}
                     </ArticleTitle>

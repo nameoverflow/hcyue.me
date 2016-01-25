@@ -14,15 +14,11 @@ export default class Archives extends React.Component {
     }
     componentDidMount() {
         this.loadTimeLine()
-        .then(() => this.setState({show: true}));
+            .then(() => this.setState({show: true}));
     }
     loadTimeLine() {
-        return ajax.get('/api/time').then(data =>
-            this.setState({
-                years: data
-            })
-            // console.log(data);
-        ).catch(e => console.log(e));
+        return ajax.get('/api/time').then(data => this.setState({years: data}))
+            .catch(e => console.log(e));
     }
     render() {
         const line = this.state.years.map(time => <TimeLine time={time} key={time}/>);
