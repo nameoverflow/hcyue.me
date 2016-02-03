@@ -10,4 +10,4 @@ module.exports = (conn, params) ->
         'DELETE': (conn, params) ->
             conn.send 'html', 'deleted'
 
-    handler[conn.request.method] conn, params
+    handler[conn._req.method] conn, params

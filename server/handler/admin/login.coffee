@@ -1,19 +1,19 @@
 yaml = require 'js-yaml'
 render = require '../../model/render'
-fs = require 'fs'
-acc = (yaml.safeLoad fs.readFileSync './config.yml', 'utf8').site.admin
 module.exports = (conn, params) ->
+    acc = conn.getConf('site').admin
     render conn
     conn.session (session) ->
         if (session.get 'auth') is 'admin'
-            conn.send 'jump', '/admin'
+            conn.jump '/admin'
         else
-            if conn.request.method is 'GET'
+            if conn._req.method is 'GET'
                 conn.view 'admin/login'
-            else if conn.request.method is 'POST'
+            else if conn._req.method is 'POST'
+                console.log acc
                 if conn.body['account'] is acc.name and conn.body['passwd'] is acc.passwd
                     session.set {'auth': 'admin'}
-                    conn.send 'jump', '/admin'
+                    conn.jump '/admin'
                 else
                     conn.view 'admin/login', {message: 'Login failed!'}
             else

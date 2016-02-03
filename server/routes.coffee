@@ -19,4 +19,4 @@ module.exports = (app) ->
     app.route '/static/*', (require 'yue/static') './public'
 
     app.route '/favicon.ico', (conn, params) ->
-        conn.send 'jump', '/static/favicon.ico'
+        conn.jump '/static/favicon.ico'

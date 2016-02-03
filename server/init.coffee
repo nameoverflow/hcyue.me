@@ -1,6 +1,8 @@
 yaml = require 'js-yaml'
 marked = require 'marked'
 pygment = require 'pygmentize-bundled'
+
+config = require './config'
 ###
 Import the core file
 ###
@@ -18,5 +20,5 @@ marked.setOptions {
 ###
 Create app object
 ###
-module.exports = new yue.app()
+module.exports = new yue(config)
 

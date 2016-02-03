@@ -7,4 +7,4 @@ module.exports = (conn) => (err, doc) =>
             err: 500
             message: err
         }
-    return conn.send 'jump', '/admin'
+    return conn.jump '/admin'
