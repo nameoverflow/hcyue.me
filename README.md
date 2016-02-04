@@ -1,4 +1,15 @@
-# blog
-personally website powered by yue.js and reactjs
+# [hcyue.me](http://hcyue.me/)
 
-[This](http://hcyue.me/article/560ab6688024ec2d197efca7)
+Personal website built with yue.js and react.
+
+## features
+- Simple content management
+- Restful APIs
+- React-based front-end rendering
+- Single page application based on react router
+
+## TODOs
+- Tag clouds
+- Refactory with ECMAscript 2016 style
+- Regular admin panel
+- Server-side rendering
