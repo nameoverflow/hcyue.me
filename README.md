@@ -1,4 +1,4 @@
-# [hcyue.me](http://hcyue.me/)
+# [hcyue.me](http://old.hcyue.me/)
 
 Personal website built with yue.js and react.
 
